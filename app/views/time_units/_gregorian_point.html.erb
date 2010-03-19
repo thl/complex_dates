@@ -1,63 +1,24 @@
 <fieldset id="gregorian_point_date" class="">
 	<legend style="border:1px solid green; color:white; background: black;">Gregorian Date</legend>
+<%= @date.to_json %>
+	<%= hidden_field_tag :type, "gregorian_point" %>
 
-<%= hidden_field_tag :type, "gregorian_point" %>
-<% certainty = [['',''],["Certain","Certain"], ["Probable", "Probable"], ["Estimated","Estimated"]] %>
-<p>
-	<%= label_tag 'Year' %> <br/>
-	<%= text_field_tag 'gregorian_date[gregorian_year]'%>
-	<%= select_tag 'gregorian_date[gregorian_year_certainty]', options_for_select(certainty)%>
-</p>
-<% m = (1..12).to_a.map {|x| [x,x]} %>
-<% m.unshift(['','']) %>
-<p>
-	<%= label_tag 'month' %> <br/>
-	<%= select_tag 'gregorian_date[gregorian_month]', options_for_select(m), { 'style' => 'width:150px'} %>
-		<%= select_tag 'gregorian_date[gregorian_month_certainty]', options_for_select(certainty)%>
-</p>
-<% d = (1..31).to_a.map {|x| [x,x]} %>
-<% d.unshift(['','']) %>
-<p>
-	<%= label_tag 'day' %> <br/>
-	<%= select_tag 'gregorian_date[gregorian_day]', options_for_select(d), { 'style' => 'width:150px'} %>
-		<%= select_tag 'gregorian_date[gregorian_day_certainty]', options_for_select(certainty)%>
-</p>
-<p>
-	<%= label_tag 'day_of_week' %> <br/>
-	<%= select_tag 'gregorian_date[gregorian_day_of_week]', options_for_select([['',''],["Monday","Monday"], ["Tuesday","Tuesday"], ["Wednesday","Wednesday"], ["Thursday","Thursday"], ["Friday","Friday"], ["Saturday","Saturday"], ["Sunday","Sunday"]]), { 'style' => 'width:150px'} %>
-		<%= select_tag 'gregorian_date[gregorian_day_of_week_certainty]', options_for_select(certainty) %>
-</p>
-<p>
-	<%= label_tag 'season' %> <br/>
-	<%= select_tag 'gregorian_date[gregorian_season]', options_for_select([['',''],["Spring","Spring"],["Summer","Summer"],["Fall","Fall"],["Winter","Winter"]]), { 'style' => 'width:150px'} %>
-		<%= select_tag 'gregorian_date[gregorian_season_certainty]', options_for_select(certainty)%>
-</p>
-<% h = (1..12).to_a.map {|x| [x,x]} %>
-<% h.unshift(['','']) %>
-<p>
-	<%= label_tag 'hour' %> <br/>
-	<%= select_tag 'gregorian_date[gregorian_hour]', options_for_select(h), { 'style' => 'width:150px'} %>
-		<%= select_tag 'gregorian_date[gregorian_hour_certainty]', options_for_select(certainty)%>
-</p>
-<% min = (1..60).to_a.map {|x| [x,x]} %>
-<% min.unshift(['','']) %>
-<p>
-	<%= label_tag 'minute' %> <br/>
-	<%= select_tag 'gregorian_date[gregorian_minute]', options_for_select(min) , { 'style' => 'width:150px'}%>
-		<%= select_tag 'gregorian_date[gregorian_minute_certainty]', options_for_select(certainty)%>
-</p>
-<p>
-	<%= label_tag 'am_pm', 'AM/PM' %> <br/>
-	<%= select_tag 'gregorian_date[gregorian_am_pm]', options_for_select([['',''],['AM','am'],['PM','pm']]), { 'style' => 'width:150px'} %>
-		<%= select_tag 'gregorian_date[gregorian_am_pm_certainty]', options_for_select(certainty)%>
-</p>
+	<%= time_unit_field 'year', @date, 'gregorian_date', ['gregorian_year', 'gregorian_year_certainty'], nil, {:text_field => true} %>
+	
+	<%= time_unit_field 'month', @date, 'gregorian_date', ['gregorian_month', 'gregorian_month_certainty'], tu_options('month') %>
 
-<% time_of_day = [["nam langs: dawn","nam langs: dawn"],["nyi shar:  sunrise", "nyi shar:  sunrise"],["nyi dros or snga dro: morning","nyi dros or snga dro: morning"],["nyi phyed: noon","nyi phyed: noon"],["phye yod or phyi dro: afternoon","phye yod or phyi dro: afternoon"],["nyi myur: hour before sunset","nyi myur: hour before sunset"],["nyi nub: sunset","nyi nub: sunset"],["sa sros: evening twilight","sa sros: evening twilight"],["srod 'khor:  dusk","srod 'khor:  dusk"],["nam phyed: midnight","nam phyed: midnight"],["phyed yol: after midnight hours","phyed yol: after midnight hours"],["tho rangs: morning twilight","tho rangs: morning twilight"],["nyin mo: day time (general)","nyin mo: day time (general)"],["dgong mo: evening (general)","dgong mo: evening (general)"],["mtshan mo: night time (general)","mtshan mo: night time (general)"]]
- %>
-<% time_of_day.unshift ["", ""] %>
-<p>
-	<%= label_tag 'time_of_the_day' %> <br/>
-	<%= select_tag 'gregorian_date[gregorian_time_of_day]', options_for_select(time_of_day), { 'style' => 'width:150px'} %>
-		<%= select_tag 'gregorian_date[gregorian_time_of_day_certainty]', options_for_select(certainty)%>
-</p>
+	<%= time_unit_field 'day', @date, 'gregorian_date', ['gregorian_day', 'gregorian_day_certainty'], tu_options('gregorian_day') %>
+
+	<%= time_unit_field 'day_of_week', @date, 'gregorian_date', ['gregorian_day_of_week', 'gregorian_day_of_week_certainty'], tu_options('day_of_week') %>
+
+	<%= time_unit_field 'season', @date, 'gregorian_date', ['gregorian_season', 'gregorian_season_certainty'], tu_options('season') %>
+
+	<%= time_unit_field 'hour', @date, 'gregorian_date', ['gregorian_hour', 'gregorian_hour_certainty'], tu_options('hour') %>
+
+	<%= time_unit_field 'minute', @date, 'gregorian_date', ['gregorian_minute', 'gregorian_minute_certainty'], tu_options('minute') %>
+
+	<%= time_unit_field 'am_pm', @date, 'gregorian_date', ['gregorian_am_pm', 'gregorian_am_pm_certainty'], tu_options('am_pm') %>
+
+	<%= time_unit_field 'time_of_day', @date, 'gregorian_date', ['gregorian_time_of_day', 'gregorian_time_of_day_certainty'], tu_options('time_of_day') %>
+
 </fieldset>

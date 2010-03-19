@@ -30,7 +30,7 @@ class TimeUnit < ActiveRecord::Base
     [start_date,end_date]
   end
   
-  def self.sufix_dates(date)
+  def self.suffix_dates(date)
       date = date.to_i % 10
        if date == 1
           'st'

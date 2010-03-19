@@ -1,4 +1,9 @@
 class TimeUnitsController < ApplicationController
+  
+  def index
+    @time_units = GregorianDate.find(:all)
+  end
+  
   def show
     @time_unit = TimeUnit.find(params[:id])
     if @time_unit.point_range == "Point"
@@ -12,6 +17,18 @@ class TimeUnitsController < ApplicationController
   
   def new
     @time_unit = TimeUnit.new
+  end
+  
+  def edit
+    @time_unit = TimeUnit.find(params[:id])
+    if @time_unit.point_range == "Point"
+      @date = @time_unit.get_point_date
+      @partial = @time_unit.date_type == "Tibetan" ? "time_units/tibetan_point" : "time_units/gregorian_point"
+    else
+      @date = @time_unit.get_range_date
+      @partial = @time_unit.date_type == "Tibetan" ? "time_units/tibetan_range" : "time_units/gregorian_range"
+    end  
+    render :template => "time_units/edit"
   end
   
   def create
@@ -42,6 +59,19 @@ class TimeUnitsController < ApplicationController
           end
         end
       
+  end
+  
+  def update
+    @time_unit = TimeUnit.find(params[:id])
+    render :text => @time_unit.to_json and return
+    @time_unit.attributes = params[:time_unit]
+
+    if @time_unit.save
+      flash[:notice] = "Time Unit was successfully updated"
+      redirect_to :action => "show", :id => @time_unit
+    else
+      #render :text => 'error'
+    end
   end
   
   def get_date

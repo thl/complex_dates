@@ -26,5 +26,5 @@
 <% end -%>
 
 <%= observe_field 'time_unit_point_range', 
-		:url => {:action => 'get_date'}, 
-		:with => "'date_type='+escape($('time_unit_date_type').value) + '&point_range=' + escape($('time_unit_point_range').value)" %>
+		:url => {:controller => 'time_units', :action => 'get_date'}, 
+		:with => "'date_type='+escape($('#time_unit_date_type').val()) + '&point_range=' + escape($('#time_unit_point_range').val())" %>
