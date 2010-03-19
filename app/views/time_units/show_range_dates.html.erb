@@ -1,0 +1,25 @@
+<% if @time_unit.date_type == 'Tibetan' %>
+ 		<div id="tibetan_start_range">
+			<%=   display_tibetan_range_date(@dates.first)  %>
+		</div>
+	
+	   to
+		
+		 <div id="tibetan_end_range">
+			 <%=   display_tibetan_range_date(@dates.last)  %>
+		</div>
+<% else %>
+
+		 <div id="gregorian_start_range">
+			 <%=  display_gregorian_range_date(@dates.first) %>
+		</div>
+	 
+		to
+		
+		 <div id="gregorian_end_range">
+			 <%=  display_gregorian_range_date(@dates.last) %>
+		</div>
+<% end %>
+		<br/>
+		<br/>
+<%= link_to 'New Date', new_time_unit_path %>

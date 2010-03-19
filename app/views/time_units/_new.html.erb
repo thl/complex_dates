@@ -1,0 +1,30 @@
+<% form_for @time_unit, :url => time_units_path do |f| -%>
+<fieldset id="choose_date" style="width:600px">
+	<legend style="border:1px solid green; color:white; background: black;">Choose Date</legend>
+	<p>
+			<%= f.label :date_type, "Calendar Type" %><br/>
+			<%= f.select(:date_type, [['Tibetan','Tibetan'],['Gregorian','Gregorian']],  {:include_blank => true}, { 'style' => 'width:150px'}) %>
+	</p>
+	
+	<p>
+		<%= f.label :point_period, "Date Type" %><br/>
+		<%= f.select(:point_range,[["Point","Point"],["Range","Period"]], {:include_blank => true}, { 'style' => 'width:150px'}) %>
+	</p>
+	
+
+	
+	<div id="dates">
+		
+	</div>
+	
+	
+	
+	<p id="submit_button",  style="display:none;">
+		<%= f.submit "Submit", :disable_with => 'Submitting...' %>
+	</p>
+</fieldset>		
+<% end -%>
+
+<%= observe_field 'time_unit_point_range', 
+		:url => {:action => 'get_date'}, 
+		:with => "'date_type='+escape($('time_unit_date_type').value) + '&point_range=' + escape($('time_unit_point_range').value)" %>

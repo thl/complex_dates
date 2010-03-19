@@ -1,0 +1,297 @@
+<fieldset id="tibetan_range_date" style="width:560px">
+  <legend style="border:1px solid green; color:white; background: black;">Tibetan Date</legend>
+  <%= hidden_field_tag :type, "tibetan_range" %>
+
+  <fieldset id="tibetan_range_start" style="width:250px; float:left;">
+    <legend style="border:1px solid green; color:white; background: black;">Start Date</legend>
+    <% calendar = [['standard tibetan calendar','standard tibetan calendar']] %>
+    <% calendar.unshift ['',''] %>
+    <% certainty = [["Certain","Certain"], ["Probable", "Probable"], ["Estimated","Estimated"]] %>
+    <% certainty.unshift ['',''] %>
+    <p>
+      <%= label_tag 'calendrical' %> <br/>
+      <%= select_tag 'tibetan_range_start[calendrical]', options_for_select(calendar), { 'style' => 'width:150px'} %>
+      <%= select_tag 'tibetan_range_start[calendrical_certainty]', options_for_select(certainty)%>
+     </p>
+     <% r = (1..50).to_a.map {|x| [x,x]} %>
+     <% r.unshift(['','']) %>
+
+      <p>
+       <%= label_tag 'rabjung' %> <br/>
+       <%= select_tag 'tibetan_range_start[rabjung_start]', options_for_select(r), { 'style' => 'width:150px'} %>
+       <%= select_tag 'tibetan_range_start[rabjung_end]', options_for_select(r), {'style' => 'width:150px;display:none;'} %>
+       <%= select_tag 'tibetan_range_start[rabjung_certainty]', options_for_select([['',''],["Certain","Certain"], ["Probable", "Probable"], ["Estimated","Estimated"]])%>
+      </p>
+
+      <script text="javascript">
+        Event.observe('tibetan_range_start_rabjung_certainty','change', function() { 
+	  if($('tibetan_range_start_rabjung_certainty').value == "Probable" || $('tibetan_range_start_rabjung_certainty').value == "Estimated")
+           {
+              $('tibetan_range_start_rabjung_end').show();
+           }
+	   else
+           {
+	     $('tibetan_range_start_rabjung_end').hide();
+           }
+	   
+	 });
+      </script>
+ 
+      <% e = [['',''],["earth","earth"], ["iron","iron"], ["water","water"], ["wood","wood"], ["fire","fire"]] %>
+      <% e.unshift ['',''] %>
+      <p>
+        <%= label_tag 'element' %> <br/>
+	<%= select_tag 'tibetan_range_start[element]', options_for_select(e), { 'style' => 'width:150px'} %>
+	<%= select_tag 'tibetan_range_start[element_certainty]', options_for_select(certainty)%>
+      </p>
+
+      <% a =[['',''],["dragon","dragon"], ["snake","snake"], ["horse","horse"], ["sheep","sheep"], ["monkey","monkey"], ["cock","cock"], ["dog","dog"], ["boar","boar"], ["rat","rat"], ["tiger","tiger"], ["ox","ox"], ["hare","hare"]] %>
+      <% a.unshift ['',''] %>
+      <p>
+	<%= label_tag 'animal' %> <br/>
+	<%= select_tag 'tibetan_range_start[animal]', options_for_select(a), { 'style' => 'width:150px'} %>
+	<%= select_tag 'tibetan_range_start[animal_certainty]', options_for_select(certainty)%>
+      </p>
+      <% g = [['',''],['Male','male'],['Female','female']] %>
+      <% g.unshift ['',''] %>
+      <p>
+	<%= label_tag 'gender' %> <br/>
+	<%= select_tag 'tibetan_range_start[gender]', options_for_select(g), { 'style' => 'width:150px'} %>
+	<%= select_tag 'tibetan_range_start[gender_certainty]', options_for_select(certainty)%>
+      </p>
+      <% m = (1..12).to_a.map {|x| [x,x]} %>
+      <% m.unshift ["", ""] %>
+      <p>
+	<%= label_tag 'month' %> <br/>
+	<%= select_tag 'tibetan_range_start[tibetan_start_month]', options_for_select(m) , { 'style' => 'width:150px'}%>
+	<%= select_tag 'tibetan_range_start[tibetan_end_month]', options_for_select(m) , { 'style' => 'width:150px;display:none;'}%>	
+	<%= select_tag 'tibetan_range_start[tibetan_month_certainty]', options_for_select(certainty)%>
+      </p>
+       <script text="javascript">
+         Event.observe('tibetan_range_start_tibetan_month_certainty','change', function() { 
+	   if($('tibetan_range_start_tibetan_month_certainty').value == "Probable" || $('tibetan_range_start_tibetan_month_certainty').value == "Estimated")
+           {
+             $('tibetan_range_start_tibetan_end_month').show();
+           }
+	   else
+           {
+	     $('tibetan_range_start_tibetan_end_month').hide();
+           }
+	   
+	  });
+        </script>
+
+        <% im = [['secondary','secondary'],['tertiary','tertiary']] %>
+        <% im.unshift ['',''] %>
+        <p>
+	  <%= label_tag 'intercalary_month' %> <br/>
+	  <%= select_tag 'tibetan_range_start[tibetan_intercalary_month]', options_for_select(im) , { 'style' => 'width:150px'}%>
+	  <%= select_tag 'tibetan_range_start[tibetan_intercalary_month_certainty]', options_for_select(certainty)%>
+        </p>
+        <% d = (1..30).to_a.map {|x| [x,x]} %>
+        <% d.unshift ["", ""] %>
+        <p>
+	  <%= label_tag 'day' %> <br/>
+	  <%= select_tag 'tibetan_range_start[tibetan_start_day]', options_for_select(d) , { 'style' => 'width:150px'}%>
+	  <%= select_tag 'tibetan_range_start[tibetan_end_day]', options_for_select(d) , { 'style' => 'width:150px;display:none;'}%>
+	  <%= select_tag 'tibetan_range_start[tibetan_day_certainty]', options_for_select(certainty)%>
+        </p>
+ 
+        <script text="javascript">
+          Event.observe('tibetan_range_start_tibetan_day_certainty','change', function() { 
+	    if($('tibetan_range_start_tibetan_day_certainty').value == "Probable" || $('tibetan_range_start_tibetan_day_certainty').value == "Estimated")
+            {
+               $('tibetan_range_start_tibetan_end_day').show();
+             }
+	     else
+             {
+	       $('tibetan_range_start_tibetan_end_day').hide();
+              }
+	   
+	   });
+         </script>
+
+         <% id = [['secondary','secondary'],['tertiary','tertiary']] %>
+         <% id.unshift ['',''] %>
+         <p>
+	   <%= label_tag 'intercalary_day' %> <br/>
+	   <%= select_tag 'tibetan_range_start[tibetan_intercalary_day]', options_for_select(id), { 'style' => 'width:150px'} %>
+	   <%= select_tag 'tibetan_range_start[tibetan_intercalary_day_certainty]', options_for_select(certainty)%>
+         </p>
+         <% h = (1..12).to_a.map {|x| [x,x]} %>
+         <% h.unshift ["", ""] %>
+         <p>
+	   <%= label_tag 'hour' %> <br/>
+	   <%= select_tag 'tibetan_range_start[tibetan_start_hour]', options_for_select(h), { 'style' => 'width:150px'} %>
+	   <%= select_tag 'tibetan_range_start[tibetan_end_hour]', options_for_select(h), { 'style' => 'width:150px;display:none;'} %>
+	   <%= select_tag 'tibetan_range_start[tibetan_hour_certainty]', options_for_select(certainty)%>
+          </p>
+
+           <script text="javascript">
+             Event.observe('tibetan_range_start_tibetan_hour_certainty','change', function() { 
+	       if($('tibetan_range_start_tibetan_hour_certainty').value == "Probable" || $('tibetan_range_start_tibetan_hour_certainty').value == "Estimated")
+               {
+                 $('tibetan_range_start_tibetan_end_hour').show();
+               }
+	       else
+               {
+	         $('tibetan_range_start_tibetan_end_hour').hide();
+               }
+	   
+	     });
+          </script>
+<% min = (1..60).to_a.map {|x| [x,x]} %>
+<% min.unshift ["", ""] %>
+<p>
+	<%= label_tag 'minute' %> <br/>
+	<%= select_tag 'tibetan_range_start[tibetan_start_minute]', options_for_select(min) , { 'style' => 'width:150px'}%>
+	<%= select_tag 'tibetan_range_start[tibetan_end_minute]', options_for_select(min) , { 'style' => 'width:150px;display:none;'}%>
+	<%= select_tag 'tibetan_range_start[tibetan_minute_certainty]', options_for_select(certainty)%>
+</p>
+ <script text="javascript">
+   Event.observe('tibetan_range_start_tibetan_minute_certainty','change', function() { 
+	   if($('tibetan_range_start_tibetan_minute_certainty').value == "Probable" || $('tibetan_range_start_tibetan_minute_certainty').value == "Estimated")
+           {
+                $('tibetan_range_start_tibetan_end_minute').show();
+           }
+	   else
+           {
+		$('tibetan_range_start_tibetan_end_minute').hide();
+           }
+	   
+	 });
+ </script>
+<% am_pm = [['AM','am'],['PM','pm']] %>
+<% am_pm.unshift ["",""] %>
+<p>
+	<%= label_tag 'am_pm', 'AM/PM' %> <br/>
+	<%= select_tag 'tibetan_range_start[tibetan_first_am_pm]', options_for_select(am_pm), { 'style' => 'width:150px'} %>
+	<%= select_tag 'tibetan_range_start[tibetan_end_am_pm]', options_for_select(am_pm), { 'style' => 'width:150px;display:none;'} %>
+	<%= select_tag 'tibetan_range_start[tibetan_am_pm_certainty]', options_for_select(certainty)%>
+</p>
+ <script text="javascript">
+   Event.observe('tibetan_range_start_tibetan_am_pm_certainty','change', function() { 
+	   if($('tibetan_range_start_tibetan_am_pm_certainty').value == "Probable" || $('tibetan_range_start_tibetan_am_pm_certainty').value == "Estimated")
+           {
+                $('tibetan_range_start_tibetan_end_am_pm').show();
+           }
+	   else
+           {
+		$('tibetan_range_start_tibetan_end_am_pm').hide();
+           }
+	   
+	 });
+ </script>
+<% time_of_day = [["nam langs: dawn","nam langs: dawn"],["nyi shar:  sunrise", "nyi shar:  sunrise"],["nyi dros or snga dro: morning","nyi dros or snga dro: morning"],["nyi phyed: noon","nyi phyed: noon"],["phye yod or phyi dro: afternoon","phye yod or phyi dro: afternoon"],["nyi myur: hour before sunset","nyi myur: hour before sunset"],["nyi nub: sunset","nyi nub: sunset"],["sa sros: evening twilight","sa sros: evening twilight"],["srod 'khor:  dusk","srod 'khor:  dusk"],["nam phyed: midnight","nam phyed: midnight"],["phyed yol: after midnight hours","phyed yol: after midnight hours"],["tho rangs: morning twilight","tho rangs: morning twilight"],["nyin mo: day time (general)","nyin mo: day time (general)"],["dgong mo: evening (general)","dgong mo: evening (general)"],["mtshan mo: night time (general)","mtshan mo: night time (general)"]]
+ %>
+<% time_of_day.unshift ["", ""] %>
+<p>
+	<%= label_tag 'time_of_the_day' %> <br/>
+	<%= select_tag 'tibetan_range_start[tibetan_start_time_of_day]', options_for_select(time_of_day) , { 'style' => 'width:150px'}%>
+	<%= select_tag 'tibetan_range_start[tibetan_end_time_of_day]', options_for_select(time_of_day) , { 'style' => 'width:150px;display:none;'}%>
+	<%= select_tag 'tibetan_range_start[tibetan_time_of_day_certainty]', options_for_select(certainty)%>
+</p>
+ <script text="javascript">
+   Event.observe('tibetan_range_start_tibetan_time_of_day_certainty','change', function() { 
+	   if($('tibetan_range_start_tibetan_time_of_day_certainty').value == "Probable" || $('tibetan_range_start_tibetan_time_of_day_certainty').value == "Estimated")
+           {
+                $('tibetan_range_start_tibetan_end_time_of_day').show();
+           }
+	   else
+           {
+		$('tibetan_range_start_tibetan_end_time_of_day').hide();
+           }
+	   
+	 });
+ </script>
+</fieldset>
+
+<fieldset id="tibetan_range_end" style="width:250px; margin-left:220px;">
+	<legend style="border:1px solid green; color:white; background: black;">End Date</legend>
+	<p>
+		<%= label_tag 'calendrical' %> <br/>
+		<%= select_tag 'tibetan_range_end[calendrical]', options_for_select(calendar), { 'style' => 'width:150px'} %>
+		<%= select_tag 'tibetan_range_end[calendrical_certainty]', options_for_select(certainty)%>
+	</p>
+	<p>
+		<%= label_tag 'rabjung' %> <br/>
+		<%= select_tag 'tibetan_range_end[rabjung_start]', options_for_select(r), { 'style' => 'width:150px'} %>
+		<%= select_tag 'tibetan_range_end[rabjung_end]', options_for_select(r), { 'style' => 'width:150px;display:none;'} %>
+		<%= select_tag 'tibetan_range_end[rabjung_certainty]', options_for_select(certainty)%>
+	</p>
+ <script text="javascript">
+   Event.observe('tibetan_range_end_rabjung_certainty','change', function() { 
+	   if($('tibetan_range_end_rabjung_certainty').value == "Probable" || $('tibetan_range_start_rabjung_certainty').value == "Estimated")
+           {
+                $('tibetan_range_end_rabjung_end').show();
+           }
+	   else
+           {
+		$('tibetan_range_end_rabjung_end').hide();
+           }
+	   
+	 });
+ </script>
+	<p>
+		<%= label_tag 'element' %> <br/>
+		<%= select_tag 'tibetan_range_end[element]', options_for_select(e), { 'style' => 'width:150px'} %>
+		<%= select_tag 'tibetan_range_end[element_certainty]', options_for_select(certainty)%>
+	</p>
+	<p>
+		<%= label_tag 'animal' %> <br/>
+		<%= select_tag 'tibetan_range_end[animal]', options_for_select(a), { 'style' => 'width:150px'} %>
+		<%= select_tag 'tibetan_range_end[animal_certainty]', options_for_select(certainty)%>
+	</p>
+	<p>
+		<%= label_tag 'gender' %> <br/>
+		<%= select_tag 'tibetan_range_end[gender]', options_for_select(g), { 'style' => 'width:150px'} %>
+		<%= select_tag 'tibetan_range_end[gender_certainty]', options_for_select(certainty)%>
+	</p>
+	<p>
+		<%= label_tag 'month' %> <br/>
+		<%= select_tag 'tibetan_range_end[tibetan_start_month]', options_for_select(m) , { 'style' => 'width:150px'}%>
+		<%= select_tag 'tibetan_range_end[tibetan_end_month]', options_for_select(m) , { 'style' => 'width:150px'}%>	
+		<%= select_tag 'tibetan_range_end[tibetan_month_certainty]', options_for_select(certainty)%>
+	</p>
+	<p>
+		<%= label_tag 'intercalary_month' %> <br/>
+		<%= select_tag 'tibetan_range_end[tibetan_intercalary_month]', options_for_select([['',''],['secondary','secondary'],['tertiary','tertiary']]) , { 'style' => 'width:150px'}%>
+		<%= select_tag 'tibetan_range_end[tibetan_intercalary_month_certainty]', options_for_select([['',''],["Certain","Certain"], ["Probable", "Probable"], ["Estimated","Estimated"]])%>
+	</p>
+	<p>
+		<%= label_tag 'day' %> <br/>
+		<%= select_tag 'tibetan_range_end[tibetan_start_day]', options_for_select(d) , { 'style' => 'width:150px'}%>
+		<%= select_tag 'tibetan_range_end[tibetan_end_day]', options_for_select(d) , { 'style' => 'width:150px'}%>
+		<%= select_tag 'tibetan_range_end[tibetan_day_certainty]', options_for_select([['',''],["Certain","Certain"], ["Probable", "Probable"], ["Estimated","Estimated"]])%>
+	</p>
+	<p>
+		<%= label_tag 'intercalary_day' %> <br/>
+		<%= select_tag 'tibetan_range_end[tibetan_intercalary_day]', options_for_select([['',''],['secondary','secondary'],['tertiary','tertiary']]), { 'style' => 'width:150px'} %>
+		<%= select_tag 'tibetan_range_end[tibetan_intercalary_day_certainty]', options_for_select([['',''],["Certain","Certain"], ["Probable", "Probable"], ["Estimated","Estimated"]])%>
+	</p>
+	<p>
+		<%= label_tag 'hour' %> <br/>
+		<%= select_tag 'tibetan_range_end[tibetan_start_hour]', options_for_select(h), { 'style' => 'width:150px'} %>
+		<%= select_tag 'tibetan_range_end[tibetan_end_hour]', options_for_select(h), { 'style' => 'width:150px'} %>
+		<%= select_tag 'tibetan_range_end[tibetan_hour_certainty]', options_for_select([['',''],["Certain","Certain"], ["Probable", "Probable"], ["Estimated","Estimated"]])%>
+	</p>
+	<p>
+		<%= label_tag 'minute' %> <br/>
+		<%= select_tag 'tibetan_range_end[tibetan_start_minute]', options_for_select(min) , { 'style' => 'width:150px'}%>
+		<%= select_tag 'tibetan_range_end[tibetan_end_minute]', options_for_select(min) , { 'style' => 'width:150px'}%>
+		<%= select_tag 'tibetan_range_end[tibetan_minute_certainty]', options_for_select([['',''],["Certain","Certain"], ["Probable", "Probable"], ["Estimated","Estimated"]])%>
+	</p>
+	<p>
+		<%= label_tag 'am_pm', 'AM/PM' %> <br/>
+		<%= select_tag 'tibetan_range_end[tibetan_first_am_pm]', options_for_select(am_pm), { 'style' => 'width:150px'} %>
+		<%= select_tag 'tibetan_range_end[tibetan_end_am_pm]', options_for_select(am_pm), { 'style' => 'width:150px'} %>
+		<%= select_tag 'tibetan_range_end[tibetan_am_pm_certainty]', options_for_select([['',''],["Certain","Certain"], ["Probable", "Probable"], ["Estimated","Estimated"]])%>
+	</p>
+	<p>
+		<%= label_tag 'time_of_the_day' %> <br/>
+		<%= select_tag 'tibetan_range_end[tibetan_start_time_of_day]', options_for_select(time_of_day) , { 'style' => 'width:150px'}%>
+		<%= select_tag 'tibetan_range_end[tibetan_end_time_of_day]', options_for_select(time_of_day) , { 'style' => 'width:150px'}%>
+		<%= select_tag 'tibetan_range_end[tibetan_time_of_day_certainty]', options_for_select([['',''],["Certain","Certain"], ["Probable", "Probable"], ["Estimated","Estimated"]])%>
+	</p>
+</fieldset>
+</fieldset>

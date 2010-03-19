@@ -1,0 +1,12 @@
+<% if @time_unit.date_type == 'Tibetan' %>
+<div id="point_tibetan_date">
+	<%= display_tibetan_date(@date) %>
+</div>
+<% else %>
+<div id="point_gregorian_date">
+	<%= display_gregorian_date(@date) %>
+</div>
+<% end %>
+<br/>
+<br/>
+<%= link_to 'New Date', new_time_unit_path %>

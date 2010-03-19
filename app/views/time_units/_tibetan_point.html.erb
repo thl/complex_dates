@@ -1,0 +1,84 @@
+<fieldset id="tibetan_point_date" class="">
+	<legend style="border:1px solid green; color:white; background: black;">Tibetan date</legend>
+	
+<%= hidden_field_tag :type, "tibetan_point" %>
+<p>
+	<%= label_tag 'calendrical' %> <br/>
+	<%= select_tag 'tibetan_date[calendrical]', options_for_select([['',''],['standard tibetan calendar','standard tibetan calendar']], { 'style' => 'width:150px'}) %>
+	<%= select_tag 'tibetan_date[calendrical_certainty]', options_for_select([['',''],["Certain","Certain"], ["Probable", "Probable"], ["Estimated","Estimated"]])%>
+</p>
+<% r = (1..50).to_a.map {|x| [x,x]} %>
+<% r.unshift(['','']) %>
+<p>
+	<%= label_tag 'rabjung' %> <br/>
+	<%= select_tag 'tibetan_date[rabjung]', options_for_select(r),  { 'style' => 'width:150px'} %>
+	<%= select_tag 'tibetan_date[rabjung_certainty]', options_for_select([['',''],["Certain","Certain"], ["Probable", "Probable"], ["Estimated","Estimated"]])%>
+</p>
+<p>
+	<%= label_tag 'element' %> <br/>
+	<%= select_tag 'tibetan_date[element]', options_for_select([['',''],["earth","earth"], ["iron","iron"], ["water","water"], ["wood","wood"], ["fire","fire"]]) , { 'style' => 'width:150px'}%>
+	<%= select_tag 'tibetan_date[element_certainty]', options_for_select([['',''],["Certain","Certain"], ["Probable", "Probable"], ["Estimated","Estimated"]])%>
+</p>
+<p>
+	<%= label_tag 'animal' %> <br/>
+	<%= select_tag 'tibetan_date[animal]', options_for_select([['',''],["dragon","dragon"], ["snake","snake"], ["horse","horse"], ["sheep","sheep"], ["monkey","monkey"], ["cock","cock"], ["dog","dog"], ["boar","boar"], ["rat","rat"], ["tiger","tiger"], ["ox","ox"], ["hare","hare"]]), { 'style' => 'width:150px'} %>
+	<%= select_tag 'tibetan_date[animal_certainty]', options_for_select([['',''],["Certain","Certain"], ["Probable", "Probable"], ["Estimated","Estimated"]])%>
+</p>
+<p>
+	<%= label_tag 'gender' %> <br/>
+	<%= select_tag 'tibetan_date[gender]', options_for_select([['',''],['Male','male'],['Female','female']]), { 'style' => 'width:150px'} %>
+	<%= select_tag 'tibetan_date[gender_certainty]', options_for_select([['',''],["Certain","Certain"], ["Probable", "Probable"], ["Estimated","Estimated"]])%>
+</p>
+<% m = (1..12).to_a.map {|x| [x,x]} %>
+<% m.unshift(['','']) %>
+<p>
+	<%= label_tag 'month' %> <br/>
+	<%= select_tag 'tibetan_date[tibetan_month]', options_for_select(m) , { 'style' => 'width:150px'}%>
+	<%= select_tag 'tibetan_date[tibetan_month_certainty]', options_for_select([['',''],["Certain","Certain"], ["Probable", "Probable"], ["Estimated","Estimated"]])%>
+</p>
+<p>
+	<%= label_tag 'intercalary_month' %> <br/>
+	<%= select_tag 'tibetan_date[tibetan_intercalary_month]', options_for_select([['',''],['secondary','secondary'],['tertiary','tertiary']]), { 'style' => 'width:150px'} %>
+	<%= select_tag 'tibetan_date[tibetan_intercalary_month_certainty]', options_for_select([['',''],["Certain","Certain"], ["Probable", "Probable"], ["Estimated","Estimated"]])%>
+</p>
+<% d = (1..30).to_a.map {|x| [x,x]} %>
+<% d.unshift(['','']) %>
+<p>
+	<%= label_tag 'day' %> <br/>
+	<%= select_tag 'tibetan_date[tibetan_day]', options_for_select(d), { 'style' => 'width:150px'} %>
+	<%= select_tag 'tibetan_date[tibetan_day_certainty]', options_for_select([['',''],["Certain","Certain"], ["Probable", "Probable"], ["Estimated","Estimated"]])%>
+</p>
+<p>
+	<%= label_tag 'intercalary_day' %> <br/>
+	<%= select_tag 'tibetan_date[tibetan_intercalary_day]', options_for_select([['',''],['secondary','secondary'],['tertiary','tertiary']]), { 'style' => 'width:150px'} %>
+	<%= select_tag 'tibetan_date[tibetan_intercalary_day_certainty]', options_for_select([['',''],["Certain","Certain"], ["Probable", "Probable"], ["Estimated","Estimated"]])%>
+</p>
+<% h = (1..12).to_a.map {|x| [x,x]} %>
+<% h.unshift(['','']) %>
+<p>
+	<%= label_tag 'hour' %> <br/>
+	<%= select_tag 'tibetan_date[tibetan_hour]', options_for_select(h), { 'style' => 'width:150px'} %>
+	<%= select_tag 'tibetan_date[tibetan_hour_certainty]', options_for_select([['',''],["Certain","Certain"], ["Probable", "Probable"], ["Estimated","Estimated"]])%>
+</p>
+<% min = (1..60).to_a.map {|x| [x,x]} %>
+<% min.unshift(['','']) %>
+<p>
+	<%= label_tag 'minute' %> <br/>
+	<%= select_tag 'tibetan_date[tibetan_minute]', options_for_select(min), { 'style' => 'width:150px'} %>
+	<%= select_tag 'tibetan_date[tibetan_minute_certainty]', options_for_select([['',''],["Certain","Certain"], ["Probable", "Probable"], ["Estimated","Estimated"]])%>
+</p>
+<p>
+	<%= label_tag 'am_pm', 'AM/PM' %> <br/>
+	<%= select_tag 'tibetan_date[tibetan_am_pm]', options_for_select([['',''],['AM','am'],['PM','pm']]), { 'style' => 'width:150px'} %>
+	<%= select_tag 'tibetan_date[tibetan_am_pm_certainty]', options_for_select([['',''],["Certain","Certain"], ["Probable", "Probable"], ["Estimated","Estimated"]])%>
+</p>
+<% time_of_day = [["nam langs: dawn","nam langs: dawn"],["nyi shar:  sunrise", "nyi shar:  sunrise"],["nyi dros or snga dro: morning","nyi dros or snga dro: morning"],["nyi phyed: noon","nyi phyed: noon"],["phye yod or phyi dro: afternoon","phye yod or phyi dro: afternoon"],["nyi myur: hour before sunset","nyi myur: hour before sunset"],["nyi nub: sunset","nyi nub: sunset"],["sa sros: evening twilight","sa sros: evening twilight"],["srod 'khor:  dusk","srod 'khor:  dusk"],["nam phyed: midnight","nam phyed: midnight"],["phyed yol: after midnight hours","phyed yol: after midnight hours"],["tho rangs: morning twilight","tho rangs: morning twilight"],["nyin mo: day time (general)","nyin mo: day time (general)"],["dgong mo: evening (general)","dgong mo: evening (general)"],["mtshan mo: night time (general)","mtshan mo: night time (general)"]] %>
+<% time_of_day.unshift ["", ""] %>
+<p>
+	<%= label_tag 'time_of_the_day' %> <br/>
+	<%= select_tag 'tibetan_date[tibetan_time_of_day]', options_for_select(time_of_day), { 'style' => 'width:150px'} %>
+	<%= select_tag 'tibetan_date[tibetan_time_of_day_certainty]', options_for_select([['',''],["Certain","Certain"], ["Probable", "Probable"], ["Estimated","Estimated"]])%>
+</p>
+</fieldset>
+
+  

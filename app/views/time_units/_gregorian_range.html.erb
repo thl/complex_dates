@@ -1,0 +1,379 @@
+<fieldset id="gregorian_range_date" style="width:420px">
+	<legend style="border:1px solid green; color:white; background: black;">Gregorian Date</legend>
+
+<%= hidden_field_tag :type, "gregorian_range" %>
+
+<fieldset id="gregorian_range_start" style="width:150px; float:left;">
+	<legend style="border:1px solid green; color:white; background: black;">Start Date</legend>
+<% certainty = [['',''],["Certain","Certain"], ["Probable", "Probable"], ["Estimated","Estimated"]]%>
+<p>
+	<%= label_tag 'Year' %> <br/>
+	<%= text_field_tag 'start_date[gregorian_start_year]' %>
+	<%= text_field_tag 'start_date[gregorian_end_year]', {}, {'style'=> 'display:none'}%>
+	<%= select_tag 'start_date[gregorian_year_certainty]', options_for_select(certainty)%>
+
+ <script text="javascript">
+   Event.observe('start_date_gregorian_year_certainty','change', function() { 
+	   if($('start_date_gregorian_year_certainty').value == "Probable" || $('start_date_gregorian_year_certainty').value == "Estimated")
+           {
+                $('start_date_gregorian_end_year').show();
+           }
+	   else
+           {
+		$('start_date_gregorian_end_year').hide();
+           }
+	   
+	 });
+ </script>
+</p>
+<% m = (1..12).to_a.map {|x| [x,x]} %>
+<% m.unshift(['','']) %>
+<p>
+	<%= label_tag 'month' %> <br/>
+	<%= select_tag 'start_date[gregorian_start_month]', options_for_select(m), { 'style' => 'width:150px'} %>
+	<%= select_tag 'start_date[gregorian_end_month]', options_for_select(m), { 'style' => 'width:150px;display:none;'} %>
+	<%= select_tag 'start_date[gregorian_month_certainty]', options_for_select(certainty)%>
+</p>
+ <script text="javascript">
+   Event.observe('start_date_gregorian_month_certainty','change', function() { 
+	   if($('start_date_gregorian_month_certainty').value == "Probable" || $('start_date_gregorian_month_certainty').value == "Estimated")
+           {
+                $('start_date_gregorian_end_month').show();
+           }
+	   else
+           {
+		$('start_date_gregorian_end_month').hide();
+           }
+	   
+	 });
+ </script>
+<% d = (1..31).to_a.map {|x| [x,x]} %>
+<% d.unshift(['','']) %>
+<p>
+	<%= label_tag 'day' %> <br/>
+	<%= select_tag 'start_date[gregorian_start_day]', options_for_select(d) , { 'style' => 'width:150px'}%>
+	<%= select_tag 'start_date[gregorian_end_day]', options_for_select(d) , { 'style' => 'width:150px;display:none;'}%>
+	<%= select_tag 'start_date[gregorian_day_certainty]', options_for_select(certainty)%>
+</p>
+ <script text="javascript">
+   Event.observe('start_date_gregorian_day_certainty','change', function() { 
+	   if($('start_date_gregorian_day_certainty').value == "Probable" || $('start_date_gregorian_day_certainty').value == "Estimated")
+           {
+                $('start_date_gregorian_end_day').show();
+           }
+	   else
+           {
+		$('start_date_gregorian_end_day').hide();
+           }
+	   
+	 });
+ </script>
+<% day_of_week = [["Monday","Monday"], ["Tuesday","Tuesday"], ["Wednesday","Wednesday"], ["Thursday","Thursday"], ["Friday","Friday"], ["Saturday","Saturday"], ["Sunday","Sunday"]] %>
+<% day_of_week.unshift ['',''] %>
+<p>
+	<%= label_tag 'day_of_week' %> <br/>
+	<%= select_tag 'start_date[gregorian_start_day_of_week]', options_for_select(day_of_week), { 'style' => 'width:150px'} %>
+	<%= select_tag 'start_date[gregorian_end_day_of_week]', options_for_select(certainty), { 'style' => 'width:150px;display:none;'} %>
+	<%= select_tag 'start_date[gregorian_day_of_week_certainty]', options_for_select(certainty)%>
+</p>
+ <script text="javascript">
+   Event.observe('start_date_gregorian_day_of_week_certainty','change', function() { 
+	   if($('start_date_gregorian_day_of_week_certainty').value == "Probable" || $('start_date_gregorian_day_of_week_certainty').value == "Estimated")
+           {
+                $('start_date_gregorian_end_day_of_week').show();
+           }
+	   else
+           {
+		$('start_date_gregorian_end_day_of_week').hide();
+           }
+	   
+	 });
+ </script>
+<% season = [["Spring","Spring"],["Summer","Summer"],["Fall","Fall"],["Winter","Winter"]] %>
+<% season.unshift ['',''] %>
+<p>
+	<%= label_tag 'season' %> <br/>
+	<%= select_tag 'start_date[gregorian_start_season]', options_for_select(season), { 'style' => 'width:150px'} %>
+	<%= select_tag 'start_date[gregorian_end_season]', options_for_select(season), { 'style' => 'width:150px;display:none;'} %>
+	<%= select_tag 'start_date[gregorian_season_certainty]', options_for_select(certainty) %>
+</p>
+ <script text="javascript">
+   Event.observe('start_date_gregorian_season_certainty','change', function() { 
+	   if($('start_date_gregorian_season_certainty').value == "Probable" || $('start_date_gregorian_season_certainty').value == "Estimated")
+           {
+                $('start_date_gregorian_end_season').show();
+           }
+	   else
+           {
+		$('start_date_gregorian_end_season').hide();
+           }
+	   
+	 });
+ </script>
+<% h = (1..12).to_a.map {|x| [x,x]} %>
+<% h.unshift ['',''] %>
+<p>
+	<%= label_tag 'hour' %> <br/>
+	<%= select_tag 'start_date[gregorian_start_hour]', options_for_select(h), { 'style' => 'width:150px'} %>
+	<%= select_tag 'start_date[gregorian_end_hour]', options_for_select(h), { 'style' => 'width:150px;display:none'} %>
+	<%= select_tag 'start_date[gregorian_hour_certainty]', options_for_select(certainty)%>
+</p>
+ <script text="javascript">
+   Event.observe('start_date_gregorian_hour_certainty','change', function() { 
+	   if($('start_date_gregorian_hour_certainty').value == "Probable" || $('start_date_gregorian_hour_certainty').value == "Estimated")
+           {
+                $('start_date_gregorian_end_hour').show();
+           }
+	   else
+           {
+		$('start_date_gregorian_end_hour').hide();
+           }
+	   
+	 });
+ </script>
+<% min = (1..60).to_a.map {|x| [x,x]} %>
+<% min.unshift ['',''] %>
+<p>
+	<%= label_tag 'minute' %> <br/>
+	<%= select_tag 'start_date[gregorian_start_minute]', options_for_select(min) , { 'style' => 'width:150px'}%>
+	<%= select_tag 'start_date[gregorian_end_minute]', options_for_select(min) , { 'style' => 'width:150px;display:none'}%>
+	<%= select_tag 'start_date[gregorian_minute_certainty]', options_for_select(certainty)%>
+</p>
+ <script text="javascript">
+   Event.observe('start_date_gregorian_minute_certainty','change', function() { 
+	   if($('start_date_gregorian_minute_certainty').value == "Probable" || $('start_date_gregorian_minute_certainty').value == "Estimated")
+           {
+                $('start_date_gregorian_end_minute').show();
+           }
+	   else
+           {
+		$('start_date_gregorian_end_minute').hide();
+           }
+	   
+	 });
+ </script>
+<% am_pm = [['AM','am'],['PM','pm']] %>
+<% am_pm.unshift ['',''] %>
+<p>
+	<%= label_tag 'am_pm', 'AM/PM' %> <br/>
+	<%= select_tag 'start_date[start_am_pm]', options_for_select(am_pm), { 'style' => 'width:150px'} %>
+	<%= select_tag 'start_date[end_am_pm]', options_for_select(am_pm), { 'style' => 'width:150px;display:none'} %>
+	<%= select_tag 'start_date[am_pm_certainty]', options_for_select(certainty)%>
+</p>
+ <script text="javascript">
+   Event.observe('start_date_am_pm_certainty','change', function() { 
+	   if($('start_date_am_pm_certainty').value == "Probable" || $('start_date_am_pm_certainty').value == "Estimated")
+           {
+                $('start_date_end_am_pm').show();
+           }
+	   else
+           {
+		$('start_date_end_am_pm').hide();
+           }
+	   
+	 });
+ </script>
+<% time_of_day = [["nam langs: dawn","nam langs: dawn"],["nyi shar:  sunrise", "nyi shar:  sunrise"],["nyi dros or snga dro: morning","nyi dros or snga dro: morning"],["nyi phyed: noon","nyi phyed: noon"],["phye yod or phyi dro: afternoon","phye yod or phyi dro: afternoon"],["nyi myur: hour before sunset","nyi myur: hour before sunset"],["nyi nub: sunset","nyi nub: sunset"],["sa sros: evening twilight","sa sros: evening twilight"],["srod 'khor:  dusk","srod 'khor:  dusk"],["nam phyed: midnight","nam phyed: midnight"],["phyed yol: after midnight hours","phyed yol: after midnight hours"],["tho rangs: morning twilight","tho rangs: morning twilight"],["nyin mo: day time (general)","nyin mo: day time (general)"],["dgong mo: evening (general)","dgong mo: evening (general)"],["mtshan mo: night time (general)","mtshan mo: night time (general)"]]
+ %>
+<% time_of_day.unshift ["", ""] %>
+
+<p>
+	<%= label_tag 'time_of_the_day' %> <br/>
+	<%= select_tag 'start_date[gregorian_start_time_of_day]', options_for_select(time_of_day), { 'style' => 'width:150px'} %>
+	<%= select_tag 'start_date[gregorian_end_time_of_day]', options_for_select(time_of_day), { 'style' => 'width:150px;display:none;'} %>
+	<%= select_tag 'start_date[gregorian_time_of_day_certainty]', options_for_select(certainty)%>
+	
+</p>
+ <script text="javascript">
+   Event.observe('start_date_gregorian_time_of_day_certainty','change', function() { 
+	   if($('start_date_gregorian_time_of_day_certainty').value == "Probable" || $('start_date_gregorian_time_of_day_certainty').value == "Estimated")
+           {
+                $('start_date_gregorian_end_time_of_day').show();
+           }
+	   else
+           {
+		$('start_date_gregorian_end_time_of_day').hide();
+           }
+	   
+	 });
+ </script>
+</fieldset>
+
+<fieldset id="gregorian_range_end" style="width:150px; margin-left:220px;">
+	<legend style="border:1px solid green; color:white; background: black;">End Date</legend>
+
+	<p>
+		<%= label_tag 'Year' %> <br/>
+		<%= text_field_tag 'end_date[gregorian_start_year]' %>
+		<%= text_field_tag 'end_date[gregorian_end_year]',{},{'style' => 'display:none;'} %>
+		<%= select_tag 'end_date[gregorian_year_certainty]', options_for_select(certainty)%>
+	</p>
+ <script text="javascript">
+   Event.observe('end_date_gregorian_year_certainty','change', function() { 
+	   if($('end_date_gregorian_year_certainty').value == "Probable" || $('end_date_gregorian_year_certainty').value == "Estimated")
+           {
+                $('end_date_gregorian_end_year').show();
+           }
+	   else
+           {
+		$('end_date_gregorian_end_year').hide();
+           }
+	   
+	 });
+ </script>
+	<p>
+		<%= label_tag 'month' %> <br/>
+		<%= select_tag 'end_date[gregorian_start_month]', options_for_select(m), { 'style' => 'width:150px'} %>
+		<%= select_tag 'end_date[gregorian_end_month]', options_for_select(m), { 'style' => 'width:150px;display:none;'} %>
+		<%= select_tag 'end_date[gregorian_month_certainty]', options_for_select(certainty)%>
+	</p>
+ <script text="javascript">
+   Event.observe('end_date_gregorian_month_certainty','change', function() { 
+	   if($('end_date_gregorian_month_certainty').value == "Probable" || $('end_date_gregorian_month_certainty').value == "Estimated")
+           {
+                $('end_date_gregorian_end_month').show();
+           }
+	   else
+           {
+		$('end_date_gregorian_end_month').hide();
+           }
+	   
+	 });
+ </script>
+	<p>
+		<%= label_tag 'day' %> <br/>
+		<%= select_tag 'end_date[gregorian_start_day]', options_for_select(d) , { 'style' => 'width:150px'}%>
+		<%= select_tag 'end_date[gregorian_end_day]', options_for_select(d) , { 'style' => 'width:150px;display:none;'}%>
+		<%= select_tag 'end_date[gregorian_day_certainty]', options_for_select(certainty)%>
+	</p>
+ <script text="javascript">
+   Event.observe('end_date_gregorian_day_certainty','change', function() { 
+	   if($('end_date_gregorian_day_certainty').value == "Probable" || $('end_date_gregorian_day_certainty').value == "Estimated")
+           {
+                $('end_date_gregorian_end_day').show();
+           }
+	   else
+           {
+		$('end_date_gregorian_end_day').hide();
+           }
+	   
+	 });
+ </script>
+	<p>
+		<%= label_tag 'day_of_week' %> <br/>
+		<%= select_tag 'end_date[gregorian_start_day_of_week]', options_for_select(day_of_week), { 'style' => 'width:150px'} %> 
+		<%= select_tag 'end_date[gregorian_end_day_of_week]', options_for_select(day_of_week), { 'style' => 'width:150px;display:none;'} %>
+		<%= select_tag 'end_date[gregorian_day_of_week_certainty]', options_for_select(certainty)%>
+	</p>
+ <script text="javascript">
+   Event.observe('end_date_gregorian_day_of_week_certainty','change', function() { 
+	   if($('end_date_gregorian_day_of_week_certainty').value == "Probable" || $('end_date_gregorian_day_of_week_certainty').value == "Estimated")
+           {
+                $('end_date_gregorian_end_day_of_week').show();
+           }
+	   else
+           {
+		$('end_date_gregorian_end_day_of_week').hide();
+           }
+	   
+	 });
+ </script>
+	<p>
+		<%= label_tag 'season' %> <br/>
+		<%= select_tag 'end_date[gregorian_start_season]', options_for_select(season), { 'style' => 'width:150px'} %>
+		<%= select_tag 'end_date[gregorian_end_season]', options_for_select(season), { 'style' => 'width:150px;display:none;'} %>
+		<%= select_tag 'end_date[gregorian_season_certainty]', options_for_select(certainty)%>
+	</p>
+ <script text="javascript">
+   Event.observe('end_date_gregorian_season_certainty','change', function() { 
+	   if($('end_date_gregorian_season_certainty').value == "Probable" || $('end_date_gregorian_season_certainty').value == "Estimated")
+           {
+                $('end_date_gregorian_end_season').show();
+           }
+	   else
+           {
+		$('end_date_gregorian_end_season').hide();
+           }
+	   
+	 });
+ </script>
+	<p>
+		<%= label_tag 'hour' %> <br/>
+		<%= select_tag 'end_date[gregorian_start_hour]', options_for_select(h), { 'style' => 'width:150px'} %>
+		<%= select_tag 'end_date[gregorian_end_hour]', options_for_select(h), { 'style' => 'width:150px;display:none;'} %>
+		<%= select_tag 'end_date[gregorian_hour_certainty]', options_for_select(certainty)%>
+	</p>
+ <script text="javascript">
+   Event.observe('end_date_gregorian_hour_certainty','change', function() { 
+	   if($('end_date_gregorian_hour_certainty').value == "Probable" || $('end_date_gregorian_hour_certainty').value == "Estimated")
+           {
+                $('end_date_gregorian_hour').show();
+           }
+	   else
+           {
+		$('end_date_gregorian_hour').hide();
+           }
+	   
+	 });
+ </script>
+	<p>
+		<%= label_tag 'minute' %> <br/>
+		<%= select_tag 'end_date[gregorian_start_minute]', options_for_select(min) , { 'style' => 'width:150px'}%>
+		<%= select_tag 'end_date[gregorian_end_minute]', options_for_select(min) , { 'style' => 'width:150px;display:none;'}%>
+		<%= select_tag 'end_date[gregorian_minute_certainty]', options_for_select(certainty)%>
+	</p>
+ <script text="javascript">
+   Event.observe('end_date_gregorian_minute_certainty','change', function() { 
+	   if($('end_date_gregorian_minute_certainty').value == "Probable" || $('end_date_gregorian_minute_certainty').value == "Estimated")
+           {
+                $('end_date_gregorian_minute').show();
+           }
+	   else
+           {
+		$('end_date_gregorian_minute').hide();
+           }
+	   
+	 });
+ </script>
+	<p>
+		<%= label_tag 'am_pm', 'AM/PM' %> <br/>
+		<%= select_tag 'end_date[start_am_pm]', options_for_select(am_pm), { 'style' => 'width:150px'} %>
+		<%= select_tag 'end_date[end_am_pm]', options_for_select(am_pm), { 'style' => 'width:150px;display:none;'} %>
+		<%= select_tag 'end_date[am_pm_certainty]', options_for_select(certainty)%>
+	</p>
+ <script text="javascript">
+   Event.observe('end_date_am_pm_certainty','change', function() { 
+	   if($('end_date_am_pm_certainty').value == "Probable" || $('end_date_am_pm_certainty').value == "Estimated")
+           {
+                $('end_date_am_pm').show();
+           }
+	   else
+           {
+		$('end_date_am_pm').hide();
+           }
+	   
+	 });
+ </script>
+
+	<p>
+		<%= label_tag 'time_of_the_day' %> <br/>
+		<%= select_tag 'end_date[gregorian_start_time_of_day]', options_for_select(time_of_day), { 'style' => 'width:150px'} %>
+		<%= select_tag 'end_date[gregorian_end_time_of_day]', options_for_select(time_of_day), { 'style' => 'width:150px;display:none'} %>
+		<%= select_tag 'end_date[gregorian_time_of_day_certainty]', options_for_select(certainty)%>
+
+	</p>
+ <script text="javascript">
+   Event.observe('end_date_gregorian_time_of_day_certainty','change', function() { 
+	   if($('end_date_gregorian_time_of_day_certainty').value == "Probable" || $('end_date_gregorian_time_of_day_certainty').value == "Estimated")
+           {
+                $('end_date_end_time_of_day').show();
+           }
+	   else
+           {
+		$('end_date_end_time_of_day').hide();
+           }
+	   
+	 });
+ </script>
+</fieldset>
+</fieldset>
