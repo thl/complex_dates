@@ -1,54 +1,59 @@
 # == Schema Information
-# Schema version: 20090611015507
 #
 # Table name: time_units
 #
-#  id          :integer(4)      not null, primary key
-#  project_id  :integer(4)
-#  point_range :string(255)
-#  date_type   :string(255)
-#  created_at  :datetime
-#  updated_at  :datetime
+#  id            :integer         not null, primary key
+#  date_id       :integer
+#  start_date_id :integer
+#  end_date_id   :integer
+#  calendar_id   :integer
+#  is_range      :boolean
+#  dateable_id   :integer
+#  dateable_type :string(255)
+#  created_at    :timestamp
+#  updated_at    :timestamp
 #
 
 class TimeUnit < ActiveRecord::Base
-  has_one :tibetan_date
-  has_one :gregorian_date
+  unloadable
   
-  has_many :tibetan_range_dates
-  has_many :gregorian_range_dates
+  belongs_to :dateable, :polymorphic=>true
+  belongs_to :calendar
+  belongs_to :date, :class_name => "ComplexDate"
+  belongs_to :start_date, :class_name => "ComplexDate"
+  belongs_to :end_date, :class_name => "ComplexDate"
   
-  
-  def get_point_date
-    self.date_type == "Gregorian" ? self.gregorian_date : self.tibetan_date
+  accepts_nested_attributes_for :date
+  accepts_nested_attributes_for :end_date
+  accepts_nested_attributes_for :start_date
+
+  def to_s
+   if is_range
+     "#{start_date} - #{end_date}"
+   else
+     date.to_s
+   end
   end
   
-  def get_range_dates
-    dates = self.date_type == "Gregorian" ? self.gregorian_range_dates : self.tibetan_range_dates
-    start_date = dates.select { |d|  d if d.start_range }.first
-    end_date = dates.select { |d| d if !d.start_range }.first
-    [start_date,end_date]
+  def date_model
+    types = [self.calendar_id, self.is_range]
+    model_name = case types
+      when [1, false] then "GregorianDate"
+      when [1, true] then "GregorianDateRange"
+      when [2, false] then "TibetanDate"
+      when [2, true] then "TibetanDateRange"
+      else nil
+    end
+    model_name
   end
   
-  def self.suffix_dates(date)
-      date = date.to_i % 10
-       if date == 1
-          'st'
-        elsif date == 2
-          'nd'
-        elsif date == 3
-          'rd'
-       else
-          'th'
-       end
+  def self.search(filter_value, options={})
+    options[:conditions] = {}
+    #build_like_conditions(
+    #  %W(notes.content notes.custom_note_title note_titles.title),
+    #  filter_value
+    #)
+    paginate(options)
   end
-  
-  def self.month_string(month)
-    months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-     (month.to_i > 0 and month.to_i < 13) ? months[month.to_i - 1] : nil
-  end
-  
 end
-
-
 

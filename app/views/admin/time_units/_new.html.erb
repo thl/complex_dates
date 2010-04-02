@@ -1,0 +1,43 @@
+<%= javascript_include_tag "complex_dates" %>
+
+<% form_for @time_unit, :url => {:action => 'create'} do |f| %>
+
+	<%= f.hidden_field :dateable_id %>
+	<%= f.hidden_field :dateable_type %>
+	
+	<fieldset class="time-unit">
+		<legend>Choose Date</legend>
+		<p>
+			<%= label :date_type_select, "Calendar Type" %><br/>
+			<%= select_tag(:date_type_select, options_for_select([['',''],['Tibetan','Tibetan'],['Gregorian','Gregorian']]),  {:style => 'width:150px'}) %>
+		</p>
+	
+		<p>
+			<%= f.label :point_range_select, "Date Type" %><br/>
+			<%= select_tag(:point_range_select, options_for_select([['',''],["Point","Date"],["Range","DateRange"]]), {:style => 'width:150px'}) %>
+		</p>
+	
+		<div id="date_form_wrapper"></div>
+	
+		<p id="submit_button"  style="display: none; clear: both;">
+			<%= f.submit "Create", :disable_with => 'Submitting...' %>
+		</p>
+	</fieldset>
+	
+<% end %>
+
+<%= observe_field 'point_range_select', 
+	:url => {:action => 'new_form', :controller => "admin/time_units"},
+	:method => 'get',
+	:with => "'date_model='+$('#date_type_select').val()+$('#point_range_select').val()+'&time_unit=#{CGI::escape(@time_unit.to_json)}'",
+	:update => "date_form_wrapper",
+	:after => "$('#submit_button').show()" %>
+	
+<script type="text/javascript">
+
+// This can be used during development to automatically select a date type for testing purposes.
+// It should be removed when this plugin is in a more stable form
+//$('#date_type_select').val('Tibetan');$('#point_range_select').val('DateRange');jQuery.ajax({data:'date_model='+$('#date_type_select').val()+$('#point_range_select').val()+'&time_unit=<%= CGI::escape(@time_unit.to_json) %>' + '&authenticity_token=' + encodeURIComponent('/CvB3cjL5yS3ZiMN8k3jGBWncgskP99Q1W28n8DJsVc='), success:function(request){jQuery('#date_form_wrapper').html(request);}, type:'post', url:'/admin/time_units/new_form'});$('#submit_button').show()
+
+
+</script>

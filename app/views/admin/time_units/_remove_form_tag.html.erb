@@ -1,0 +1,13 @@
+<% 
+# Remove the <form /> element that is created by form_for, as form_for is
+# only used to allow the partials to use nested attributes.
+# There should be a more elegant way of setting up the _edit partials so
+# that this can be avoided.
+%>
+
+<script type="text/javascript">
+
+var form_selector = '#date_form_wrapper form#new_time_unit';
+$(form_selector).replaceWith($(form_selector).contents());
+
+</script>

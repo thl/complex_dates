@@ -1,0 +1,15 @@
+<% form_for @time_unit, :url => {:action => 'create'} do |f| %>
+
+<%= f.hidden_field :calendar_id %>
+<%= f.hidden_field :is_range %>
+
+<fieldset class="complex-date">
+  	<legend>Gregorian Date</legend>
+	
+	<%= render :partial => "admin/gregorian_dates/form_fields", :locals => {:f => f, :object_name => :date} %>
+
+</fieldset>
+
+<% end %>
+
+<%= render :partial => "admin/time_units/remove_form_tag" %>

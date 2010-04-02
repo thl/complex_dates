@@ -1,0 +1,17 @@
+<%= javascript_include_tag "complex_dates" %>
+
+<% form_for @time_unit, :url => {:id => @time_unit.id, :action => 'update'} do |f| %>
+	
+	<fieldset class="time-unit">
+		<legend>Edit Date</legend>
+	
+		<div id="date_form_wrapper">
+			<%= render :partial => "admin/#{@time_unit.date_model.tableize}/edit", :locals => {:f => f} %>
+		</div>
+	
+		<p id="submit_button" style="clear: both;">
+			<%= f.submit "Update" %>
+		</p>
+	</fieldset>
+	
+<% end %>

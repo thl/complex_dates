@@ -1,0 +1,12 @@
+<% f.fields_for object_name do |date_form| %>
+	<% date_form.object = @time_unit.send(object_name) unless @time_unit.send(object_name).nil? %>
+	<%= complex_date_text_field date_form, :year %>
+	<%= complex_date_select date_form, :month, true, :collection => date_options_for(:month) %>
+	<%= complex_date_select date_form, :day, true, :collection => date_options_for(:gregorian_day) %>
+	<%= complex_date_select date_form, :day_of_week_id %>
+	<%= complex_date_select date_form, :season_id %>
+	<%= complex_date_select date_form, :hour, true, :collection => date_options_for(:hour) %>
+	<%= complex_date_select date_form, :minute, true, :collection => date_options_for(:minute) %>
+	<%= complex_date_select date_form, :am_pm_id, false, :text => "AM PM" %>
+	<%= complex_date_select date_form, :time_of_day_id %>
+<% end %>
