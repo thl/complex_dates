@@ -130,9 +130,10 @@ class ComplexDate < ActiveRecord::Base
   
   def formatted_tibetan_year
     hyphen = "-" unless element.nil? || animal.nil?
-    r = " of the #{ff(:rabjung, true)} sixty-year cycle"
+    r = ff(:rabjung, true)
+    r = " of the #{r} sixty-year cycle" unless r.blank?
     suffix = " (standard Tibetan calendar)"
-    "the #{ff(:gender, true)} #{ff(:element, true)}#{hyphen}#{ff(:animal, true)} year#{r}#{suffix}" unless gender.nil? && element.nil? && animal.nil?
+    "the #{ff(:gender, true)} #{ff(:element, true)}#{hyphen}#{ff(:animal, true)} year#{r}#{suffix}" unless gender.nil? && element.nil? && animal.nil? && r.blank?
   end
   
   def formatted_season
