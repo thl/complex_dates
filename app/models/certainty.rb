@@ -10,5 +10,9 @@ class Certainty < PassiveRecord::Base
   def to_s
     name
   end
+  
+  def self.default
+    self.find(1)
+  end
 end
 

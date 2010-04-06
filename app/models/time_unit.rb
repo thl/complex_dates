@@ -17,6 +17,8 @@
 class TimeUnit < ActiveRecord::Base
   unloadable
   
+  extend IsNotable
+  
   belongs_to :dateable, :polymorphic=>true
   belongs_to :calendar
   belongs_to :date, :class_name => "ComplexDate"
@@ -48,6 +50,15 @@ class TimeUnit < ActiveRecord::Base
   end
   
   def self.search(filter_value, options={})
+    options[:conditions] = {}
+    #build_like_conditions(
+    #  %W(notes.content notes.custom_note_title note_titles.title),
+    #  filter_value
+    #)
+    paginate(options)
+  end
+  
+  def search(filter_value, options={})
     options[:conditions] = {}
     #build_like_conditions(
     #  %W(notes.content notes.custom_note_title note_titles.title),

@@ -7,7 +7,7 @@ module Admin::TimeUnitsHelper
     intercalary = options[:intercalary].to_s unless options[:intercalary].blank?
     
     if options[:collection].nil?
-      collection = field_type.classify.constantize.find(:all)
+      collection = field_type.classify.constantize.options
       collection_from_model = true
     else
       collection = options[:collection]
@@ -19,12 +19,12 @@ module Admin::TimeUnitsHelper
     html += "<p>"
     html += "<div class='complex-date-certainty-wrapper'>"
     html += form_builder.label field_name, "Certainty:"
-    html += form_builder.collection_select certainty_field_name, Certainty.options, :id, :name, {:include_blank => true}, :onchange => ("toggle_end_date(this, '#{get_object_name_for(form_builder)}_#{field_type}_end_wrapper')" if show_end)
+    html += form_builder.collection_select certainty_field_name, Certainty.options, :id, :name, {}, :onchange => ("toggle_end_date(this, '#{get_object_name_for(form_builder)}_#{field_type}_end_wrapper')" if show_end)
     html += "</div>"
     html += "<div class='complex-date-field-wrapper'>"
     html += form_builder.label field_name, (options[:text] || field_type.humanize.titleize)+":"
     if collection_from_model
-      html += form_builder.collection_select field_name, collection, :id, :name, :include_blank => true
+      html += form_builder.collection_select field_name, collection, :id, options[:collection_text_method] || :name, :include_blank => true
     else
       html += form_builder.select field_name, collection, :include_blank => true
     end
@@ -64,7 +64,7 @@ module Admin::TimeUnitsHelper
     html += "<p>"
     html += "<div class='complex-date-certainty-wrapper'>"
     html += form_builder.label field_name, "Certainty:"
-    html += form_builder.collection_select certainty_field_name, Certainty.options, :id, :name, {:include_blank => true}, :onchange => ("toggle_end_date(this, '#{get_object_name_for(form_builder)}_#{field_type}_end_wrapper')" if show_end)
+    html += form_builder.collection_select certainty_field_name, Certainty.options, :id, :name, {}, :onchange => ("toggle_end_date(this, '#{get_object_name_for(form_builder)}_#{field_type}_end_wrapper')" if show_end)
     html += "</div>"
     html += "<div class='complex-date-field-wrapper'>"
     html += form_builder.label field_name, (options[:text] || field_type.humanize.titleize)+":"
@@ -98,62 +98,31 @@ module Admin::TimeUnitsHelper
     html += "</p>"
   end
   
-  def complex_date_display_field_old(complex_date, field_name, show_end=true, options={})
-    field_name_str = field_name.to_s
-    field_type = field_name_str
-    
-    display_field_name = (field_name_str =~ /_id$/ ? field_name_str.sub(/_id$/, "") : field_name_str).to_sym
-    
-    certainty_field_name = ("#{display_field_name}_certainty").to_sym
-    html = ""
-    html += "<p>"
-    html += "<div class='complex-date-certainty-wrapper'>"
-    html += "Certainty:"
-    html += complex_date.send(certainty_field_name).to_s
-    html += "</div>"
-    html += "<div class='complex-date-field-wrapper'>"
-    html += (options[:text] || field_type.humanize.titleize)+":"
-    html += complex_date[display_field_name].to_s
-    html += "</div>"
-    
-    if show_end
-      end_field_name = (field_name_str =~ /_id$/ ? field_name_str.sub(/_id$/, "_end_id") : field_name_str + "_end").to_sym
-      end_field_name_str = end_field_name.to_s
-      display_end_field_name = (end_field_name_str =~ /_id$/ ? end_field_name_str.sub(/_id$/, "") : end_field_name_str).to_sym
-      html += "<div class='complex-date-end-wrapper'#{" style='display:none;'" if complex_date[end_field_name].blank?}>"
-      html += "To:"
-      html += complex_date[display_end_field_name].to_s
-      html += "</div>"
-    end
-    
-    html += "</p>"
-    
-    html
-  end
-  
   def complex_date_display_field(complex_date, field_name, show_end=true, options={})
     field_name_str = field_name.to_s
     field_type = field_name_str
     
     display_field_name = (field_name_str =~ /_id$/ ? field_name_str.sub(/_id$/, "") : field_name_str).to_sym
+    field_value = complex_date.send(display_field_name)
 	
     certainty_field_name = ("#{display_field_name}_certainty").to_sym
     html = ""
     html += "<div class='row'>"
     html += "<label>#{(options[:text] || field_type.humanize.titleize)}</label>"
     html += "<span>"
-    html += complex_date.send(display_field_name).to_s
+    html += field_value.send(options[:collection_text_method] || :to_s) unless field_value.nil?
     if show_end
       end_field_name = (field_name_str =~ /_id$/ ? field_name_str.sub(/_id$/, "_end_id") : field_name_str + "_end").to_sym
       end_field_name_str = end_field_name.to_s
       display_end_field_name = (end_field_name_str =~ /_id$/ ? end_field_name_str.sub(/_id$/, "") : end_field_name_str).to_sym
+      end_field_value = complex_date.send(display_end_field_name)
       html += "<span#{" style='display:none;'" if complex_date[end_field_name].blank?}>"
       html += " to "
-      html += complex_date.send(display_end_field_name).to_s
+      html += end_field_value.send(options[:collection_text_method] || :to_s) unless end_field_value.nil?
       html += "</span>"
     end
     certainty_value = complex_date.send(certainty_field_name)
-    html += " (#{certainty_value})" unless certainty_value.nil?
+    html += " (#{certainty_value})" unless certainty_value.nil? || certainty_value.to_s.eql?("Certain")
     
     html += "</div>"
     
@@ -166,7 +135,7 @@ module Admin::TimeUnitsHelper
       when :month then (1..12).to_a
       when :gregorian_day then (1..31).to_a
       when :tibetan_day then (1..30).to_a
-      when :hour then (1..12).to_a
+      when :hour then (0..23).to_a
       when :minute then (1..60).to_a
       else nil
     end

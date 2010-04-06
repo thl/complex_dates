@@ -9,5 +9,5 @@
 	<%= complex_date_select date_form, :day, true, :collection => date_options_for(:tibetan_day), :intercalary => :day %>
 	<%= complex_date_select date_form, :hour, true, :collection => date_options_for(:hour) %>
 	<%= complex_date_select date_form, :minute, true, :collection => date_options_for(:minute) %>
-	<%= complex_date_select date_form, :time_of_day_id %>
+	<%= complex_date_select date_form, :time_of_day_id, true, :collection_text_method => :tibetan_name %>
 <% end %>

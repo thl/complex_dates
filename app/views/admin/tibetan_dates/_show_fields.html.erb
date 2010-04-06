@@ -4,8 +4,8 @@
 <%= complex_date_display_field @complex_date, :element_id, false %>
 <%= complex_date_display_field @complex_date, :animal_id, false %>
 <%= complex_date_display_field @complex_date, :gender_id, false %>
-<%= complex_date_display_field @complex_date, :month, :intercalary => :month %>
-<%= complex_date_display_field @complex_date, :day, :intercalary => :day %>
+<%= complex_date_display_field @complex_date, :month, true, :intercalary => :month %>
+<%= complex_date_display_field @complex_date, :day, true, :intercalary => :day %>
 <%= complex_date_display_field @complex_date, :hour %>
 <%= complex_date_display_field @complex_date, :minute %>
-<%= complex_date_display_field @complex_date, :time_of_day_id %>
+<%= complex_date_display_field @complex_date, :time_of_day_id, true, :collection_text_method => :tibetan_name %>

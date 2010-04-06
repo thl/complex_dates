@@ -6,5 +6,4 @@
 <%= complex_date_display_field @complex_date, :season_id %>
 <%= complex_date_display_field @complex_date, :hour %>
 <%= complex_date_display_field @complex_date, :minute %>
-<%= complex_date_display_field @complex_date, :am_pm_id, false, :text => "AM PM" %>
-<%= complex_date_display_field @complex_date, :time_of_day_id %>
+<%= complex_date_display_field @complex_date, :time_of_day_id, true, :collection_text_method => :gregorian_name %>
