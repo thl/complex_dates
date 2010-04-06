@@ -38,7 +38,7 @@ class Admin::TimeUnitsController < ResourceController::Base
     end
     if @time_unit.save
       flash[:notice] = 'Date successfully created.'
-    else
+    end
     redirect_to polymorphic_url([:admin, @time_unit.dateable, @time_unit])
   end
   
@@ -47,7 +47,6 @@ class Admin::TimeUnitsController < ResourceController::Base
     @time_unit.update_attributes params[:time_unit]
     if @time_unit.save
       flash[:notice] = 'Date successfully updated.'
-    else
     end
     redirect_to polymorphic_url([:admin, @time_unit.dateable, @time_unit])
   end
