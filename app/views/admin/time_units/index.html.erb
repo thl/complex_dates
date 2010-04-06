@@ -1,2 +1,3 @@
-<% @time_units.each do |time_unit| %>
-<% end %>
+<%= render :partial => 'top' rescue nil %>
+<%= render :partial => 'list', :locals => { :list => @collection } %>
+<%= render :partial => 'bottom' rescue nil %>
