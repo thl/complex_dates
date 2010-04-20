@@ -1,11 +1,9 @@
 class Admin::TimeUnitsController < ResourceController::Base
   
-  belongs_to :feature_geo_code
+  belongs_to :category_feature, :description, :feature_geo_code, :feature_name, :feature_object_type, :feature_relation, :feature, :shape
   
   before_filter :collection
 
-  create.wants.html { redirect_to polymorphic_url([:admin, object.dateable, object]) }
-  update.wants.html { redirect_to polymorphic_url([:admin, object.dateable, object]) }
   destroy.wants.html { redirect_to polymorphic_url([:admin, object.dateable]) }
  
   def index
@@ -17,11 +15,7 @@ class Admin::TimeUnitsController < ResourceController::Base
   end
   
   def new
-    parent_association
-    @time_unit = TimeUnit.new({
-      :dateable_id => @parent_object.id,
-      :dateable_type => @parent_object.class.to_s
-    })
+    @time_unit = @parent_object.time_units.new
   end
   
   def edit
@@ -53,11 +47,14 @@ class Admin::TimeUnitsController < ResourceController::Base
   
   def new_form
     date_model = params[:date_model]
-    time_unit_params = ActiveSupport::JSON.decode(params[:time_unit])
-    time_unit_params = time_unit_params.slice(:dateable_type, :dateable_id)
-    @time_unit = TimeUnit.new(time_unit_params)
+    
+    @time_unit = TimeUnit.new
+    
+    # These two attributes are necessary for setting the time_unit[calendar_id]
+    # and time_unit[is_range] fields in the _edit partial.
     @time_unit.calendar_id = date_model.constantize.new.calendar_id
     @time_unit.is_range = date_model.constantize.new.is_range
+    
     if @time_unit.is_range
       @time_unit.start_date = ComplexDate.new
       @time_unit.end_date = ComplexDate.new
@@ -66,7 +63,6 @@ class Admin::TimeUnitsController < ResourceController::Base
     end
     render :partial => "admin/#{date_model.tableize}/edit"
   end
-  
   
   protected
   
