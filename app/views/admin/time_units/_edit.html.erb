@@ -8,10 +8,10 @@
 		<div id="date_form_wrapper">
 			<%= render :partial => "admin/#{@time_unit.date_model.tableize}/edit", :locals => {:f => f} %>
 		</div>
-	
-		<p id="submit_button" style="clear: both;">
-			<%= f.submit "Update" %>
-		</p>
+
 	</fieldset>
-	
+
+	<div style="clear: both;">
+		<%= f.submit "Update" %> | <%= link_to 'Cancel', collection_path %>
+	</div>	
 <% end %>

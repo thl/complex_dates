@@ -3,7 +3,8 @@ class Calendrical < PassiveRecord::Base
   
   schema :name => String, :id => Integer
   
-  create :name => "To be determined...", :id => 1
+  create :name => "Pakluk Kalacakra", :id => 1
+  create :name => "Tsurpu", :id => 2
   
   def to_s
     name

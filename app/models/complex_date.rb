@@ -113,14 +113,16 @@ class ComplexDate < ActiveRecord::Base
       d << "#{formatted_time}" unless formatted_time.blank?
       d << "#{formatted_gregorian_time_of_day}" unless formatted_gregorian_time_of_day.blank?
       d << "#{formatted_gregorian_month_day}" unless formatted_gregorian_month_day.blank?
-      d << "#{formatted_season}" unless formatted_season.blank?
+      d << "#{formatted_gregorian_season}" unless formatted_gregorian_season.blank?
       d << "#{formatted_gregorian_year}" unless formatted_gregorian_year.blank?
       d.join(", ")
     else
       d = []
       d << "#{formatted_time}" unless formatted_time.blank?
       d << "#{formatted_tibetan_time_of_day}" unless formatted_tibetan_time_of_day.blank?
+      d << "#{formatted_tibetan_day_of_week}" unless formatted_tibetan_day_of_week.blank?
       d << "#{formatted_tibetan_month_day}" unless formatted_tibetan_month_day.blank?
+      d << "#{formatted_tibetan_season}" unless formatted_tibetan_season.blank?
       d << "#{formatted_tibetan_year}" unless formatted_tibetan_year.blank?
       d.join(", ")
     end
@@ -143,11 +145,21 @@ class ComplexDate < ActiveRecord::Base
       "#{ff(:hour, true)}:#{ff(:minute, true)}#{am_pm}" unless hour.nil? && minute.nil?
     # If at least one of the _end fields isn't nil:
     else
-      certainty_default = Certainty.default
-      certainty_values = [hour_certainty, minute_certainty].reject{|c| c.nil? || c == certainty_default}
-      certainty = " (#{certainty_values.collect{|c| c.to_s}.join("/")})" unless certainty_values.empty?
-      "#{format_time(hour, minute)}-#{format_time(hour_end, minute_end)}#{certainty}"
+      certainty_str = format_grouped_certainties([:hour, :minute])
+      "#{format_time(hour, minute)}-#{format_time(hour_end, minute_end)}#{certainty_str}"
     end
+  end
+  
+  # Given an argument of [:hour, :minute], this will return " (hours probable/minutes estimated)"
+  # if hour_certainty is probable and minute_certainty is estimated, or nil if the certainties
+  # are all either nil or Certainty.default
+  def format_grouped_certainties(certainty_prefixes)
+    certainty_default = Certainty.default
+    formatted_certainties = certainty_prefixes.collect{|prefix|
+      value = self.send("#{prefix}_certainty")
+      "#{prefix.to_s.pluralize} #{value.to_s.downcase}" unless value.nil?
+    }.reject{|v| v.nil? || v == certainty_default}
+    " (#{formatted_certainties.join("/")})" unless formatted_certainties.empty?
   end
   
   def formatted_tibetan_time_of_day
@@ -157,10 +169,26 @@ class ComplexDate < ActiveRecord::Base
   def formatted_gregorian_time_of_day
     "#{ff(:time_of_day, :format_gregorian_time_of_day)}"
   end
-      
+  
+  def formatted_tibetan_day_of_week
+    "#{ff(:day_of_week, :format_tibetan_day_of_week)}"
+  end
+  
+  def formatted_gregorian_day_of_week
+    "#{ff(:day_of_week, :format_gregorian_day_of_week)}"
+  end
+  
+  def formatted_tibetan_season
+    "#{ff(:season, :format_tibetan_season)}"
+  end
+  
+  def formatted_gregorian_season
+    "#{ff(:season, :format_gregorian_season)}"
+  end
+          
   def formatted_gregorian_month_day
     d = " #{ff(:day, true)}" unless day.nil?
-    dw = " (#{ff(:day_of_week)})" unless day_of_week.nil?
+    dw = " (#{ff(:day_of_week, :format_gregorian_day_of_week)})" unless day_of_week.nil?
     "#{ff(:month, :format_gregorian_month)}#{d}#{dw}" unless month.nil? && day.nil? && day_of_week.nil?
   end
   
@@ -182,10 +210,6 @@ class ComplexDate < ActiveRecord::Base
     "the #{ff(:gender, true)} #{ff(:element, true)}#{hyphen}#{ff(:animal, true)} year#{r}#{suffix}" unless gender.nil? && element.nil? && animal.nil? && r.blank?
   end
   
-  def formatted_season
-    "#{ff(:season)}"
-  end
-  
   # Methods beginning with "format_" take an argument of a field value and return the formatted version of that value.
   # These take an argument so that they can be also be used for "_end" fields.
   
@@ -198,8 +222,10 @@ class ComplexDate < ActiveRecord::Base
   end
   
   def format_time(hour, minute)
-    am_pm = " #{hour > 11 ? 'PM' : 'AM'}"
-    hour = format_hour(hour)
+    unless hour.nil?
+      am_pm = " #{hour > 11 ? 'PM' : 'AM'}"
+      hour = format_hour(hour)
+    end
     "#{hour}:#{format_minute(minute)}#{am_pm}" unless hour.nil? && minute.nil?
   end
   
@@ -211,15 +237,31 @@ class ComplexDate < ActiveRecord::Base
     time_of_day.tibetan_name unless time_of_day.nil?
   end
   
+  def format_gregorian_day_of_week(day_of_week)
+    day_of_week.gregorian_name unless day_of_week.nil?
+  end
+    
+  def format_tibetan_day_of_week(day_of_week)
+    day_of_week.tibetan_name unless day_of_week.nil?
+  end
+  
   def format_gregorian_month(mon)
     month_names = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-    month_names[mon-1] || nil
+    month_names[mon-1] unless mon.nil?
   end
   
   def format_tibetan_month(mon)
     "#{mon.ordinalize}" unless mon.nil?
   end
   
+  def format_gregorian_season(season)
+    season.gregorian_name unless season.nil?
+  end
+    
+  def format_tibetan_season(season)
+    season.tibetan_name unless season.nil?
+  end
+    
   def format_day(day)
     day.ordinalize unless day.nil?
   end

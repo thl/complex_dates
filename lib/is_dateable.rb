@@ -3,6 +3,7 @@
 # class that needs dates
 #
 module IsDateable
+
   
   def self.extended(base)
     
@@ -32,6 +33,17 @@ module IsDateable
           end
         rescue
           time_units.build(attrs)
+        end
+      end
+      
+      #
+      #
+      #
+      def time_units_ordered_by_date(descending=true)
+        if descending
+          TimeUnit.find_ordered_by_date({:dateable_id => id, :dateable_type => self.class.name})
+        else
+          # Not implemented yet (as it currently isn't needed).
         end
       end
       

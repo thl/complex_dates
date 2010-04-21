@@ -15,8 +15,6 @@
 #
 
 class TimeUnit < ActiveRecord::Base
-  unloadable
-  
   extend IsNotable
   
   belongs_to :dateable, :polymorphic=>true
@@ -49,6 +47,17 @@ class TimeUnit < ActiveRecord::Base
     model_name
   end
   
+  # This is currently fairly rudimentary, as it isn't being put to important use yet.
+  # Currently, it sorts all Gregorian dates before all Tibetan dates, then sorts by the
+  # fields listed below of either date or end_date, depending on whether the TimeUnit
+  # is a point or range. 
+  def self.find_ordered_by_date(conditions=nil)
+    order = 'time_units.calendar_id ASC, '
+    complex_date_fields = %w[rabjung_id year season_id month day hour minute]
+    order += complex_date_fields.collect{|field| "complex_dates.#{field} DESC"}.join(", ")
+    self.find(:all, :conditions => conditions, :order => order, :include=>[:date, :end_date])
+  end
+    
   def self.search(filter_value, options={})
     options[:conditions] = {}
     #build_like_conditions(
@@ -67,4 +76,3 @@ class TimeUnit < ActiveRecord::Base
     paginate(options)
   end
 end
-

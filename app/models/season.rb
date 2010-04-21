@@ -1,14 +1,14 @@
 class Season < PassiveRecord::Base
   extend IsOptionable
   
-  schema :name => String, :id => Integer
+  schema :id => Integer, :gregorian_name => String, :tibetan_name => String
   
-  create :name => "Spring", :id => 1
-  create :name => "Summer", :id => 2
-  create :name => "Fall", :id => 3
-  create :name => "Winter", :id => 4
+  create :id => 1, :gregorian_name => "Spring", :tibetan_name => "dpyid ka"
+  create :id => 2, :gregorian_name => "Summer", :tibetan_name => "dbyar ka"
+  create :id => 3, :gregorian_name => "Fall", :tibetan_name => "ston ka"
+  create :id => 4, :gregorian_name => "Winter", :tibetan_name => "dgon ka"
   
   def to_s
-    name
+    "#{gregorian_name} / #{tibetan_name}"
   end
 end

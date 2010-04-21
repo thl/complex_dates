@@ -18,7 +18,6 @@ module Admin::TimeUnitsHelper
     html = ""
     html += "<p>"
     html += "<div class='complex-date-certainty-wrapper'>"
-    html += form_builder.label field_name, "Certainty:"
     html += form_builder.collection_select certainty_field_name, Certainty.options, :id, :name, {}, :onchange => ("toggle_end_date(this, '#{get_object_name_for(form_builder)}_#{field_type}_end_wrapper')" if show_end)
     html += "</div>"
     html += "<div class='complex-date-field-wrapper'>"
@@ -30,7 +29,7 @@ module Admin::TimeUnitsHelper
     end
     unless intercalary.blank?
       intercalary_collection = "intercalary_#{intercalary}".classify.constantize.find(:all)
-      html += form_builder.collection_select "intercalary_#{intercalary}_id", intercalary_collection, :id, :name, :include_blank => true
+      html += form_builder.collection_select "intercalary_#{intercalary}_id", intercalary_collection, :id, :name, {:include_blank => true}, :class => "intercalary"
     end
     html += "</div>"
     
@@ -39,7 +38,7 @@ module Admin::TimeUnitsHelper
       html += "<div id='#{get_object_name_for(form_builder)}_#{field_type}_end_wrapper' class='complex-date-end-wrapper'#{" style='display:none;'" if form_builder.object[end_field_name].blank?}>"
       html += form_builder.label end_field_name, "To:"
       if collection_from_model
-        html += form_builder.collection_select end_field_name, collection, :id, :name, :include_blank => true
+        html += form_builder.collection_select end_field_name, collection, :id, options[:collection_text_method] || :name, :include_blank => true
       else
         html += form_builder.select end_field_name, collection, :include_blank => true
       end
@@ -63,7 +62,6 @@ module Admin::TimeUnitsHelper
     html = ""
     html += "<p>"
     html += "<div class='complex-date-certainty-wrapper'>"
-    html += form_builder.label field_name, "Certainty:"
     html += form_builder.collection_select certainty_field_name, Certainty.options, :id, :name, {}, :onchange => ("toggle_end_date(this, '#{get_object_name_for(form_builder)}_#{field_type}_end_wrapper')" if show_end)
     html += "</div>"
     html += "<div class='complex-date-field-wrapper'>"
