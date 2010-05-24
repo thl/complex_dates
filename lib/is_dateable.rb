@@ -41,7 +41,7 @@ module IsDateable
       #
       def time_units_ordered_by_date(descending=true)
         if descending
-          TimeUnit.find_ordered_by_date({:dateable_id => id, :dateable_type => self.class.name})
+          TimeUnit.find_ordered_by_date({:dateable_id => id, :dateable_type => self.class.base_class.name})
         else
           # Not implemented yet (as it currently isn't needed).
         end
