@@ -3,7 +3,7 @@
 		Tibetan Date Range
 		<%= edit_item_link @time_unit %>
 	</legend>
-	
+<%= render :partial => 'admin/time_units/frequency', :locals => {:frequency => @time_unit.frequency} %>	
 	<fieldset class="complex-date">
 		<legend>Start</legend>
 		<%= render :partial => "admin/tibetan_dates/show_fields", :locals => {:object_name => :start_date} %>

@@ -3,5 +3,6 @@
 		Tibetan Date
 		<%= edit_item_link @time_unit %>
 	</legend>
-	<%= render :partial => "admin/tibetan_dates/show_fields", :locals => {:object_name => :date} %>
+<%= render :partial => 'admin/time_units/frequency', :locals => {:frequency => @time_unit.frequency} %>
+<%= render :partial => "admin/tibetan_dates/show_fields", :locals => {:object_name => :date} %>
 </fieldset>

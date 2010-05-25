@@ -1,19 +1,3 @@
-# == Schema Information
-#
-# Table name: time_units
-#
-#  id            :integer         not null, primary key
-#  date_id       :integer
-#  start_date_id :integer
-#  end_date_id   :integer
-#  calendar_id   :integer
-#  is_range      :boolean
-#  dateable_id   :integer
-#  dateable_type :string(255)
-#  created_at    :timestamp
-#  updated_at    :timestamp
-#
-
 class TimeUnit < ActiveRecord::Base
   extend IsNotable
   
@@ -28,11 +12,10 @@ class TimeUnit < ActiveRecord::Base
   accepts_nested_attributes_for :start_date
 
   def to_s
-   if is_range
-     "#{start_date} - #{end_date}"
-   else
-     date.to_s
-   end
+    s = is_range ? "#{start_date} - #{end_date}" : date.to_s
+    freq = self.frequency
+    s << " (#{freq.title})" if !freq.nil?
+    s
   end
   
   def date_model
@@ -45,6 +28,14 @@ class TimeUnit < ActiveRecord::Base
       else nil
     end
     model_name
+  end
+  
+  def frequency
+    case self.calendar_id
+    when 1 then GregorianFrequency.find(self.frequency_id)
+    when 2 then TibetanFrequency.find(self.frequency_id)
+    else Frequency.find(self.frequency_id)
+    end
   end
   
   # This is currently fairly rudimentary, as it isn't being put to important use yet.
@@ -76,3 +67,20 @@ class TimeUnit < ActiveRecord::Base
     paginate(options)
   end
 end
+
+# == Schema Info
+# Schema version: 20100525173430
+#
+# Table name: time_units
+#
+#  id            :integer         not null, primary key
+#  calendar_id   :integer
+#  date_id       :integer
+#  dateable_id   :integer
+#  end_date_id   :integer
+#  frequency_id  :integer
+#  start_date_id :integer
+#  dateable_type :string(255)
+#  is_range      :boolean
+#  created_at    :timestamp
+#  updated_at    :timestamp
