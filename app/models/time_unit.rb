@@ -31,7 +31,8 @@ class TimeUnit < ActiveRecord::Base
   end
   
   def frequency
-    case self.calendar_id
+    return nil if self.frequency_id.nil?
+    return case self.calendar_id
     when 1 then GregorianFrequency.find(self.frequency_id)
     when 2 then TibetanFrequency.find(self.frequency_id)
     else Frequency.find(self.frequency_id)

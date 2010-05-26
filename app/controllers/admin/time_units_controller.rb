@@ -1,6 +1,6 @@
 class Admin::TimeUnitsController < ResourceController::Base
   
-  belongs_to :category_feature, :description, :feature_geo_code, :feature_name, :feature_object_type, :feature_relation, :feature, :shape
+  belongs_to :altitude, :category_feature, :description, :feature_geo_code, :feature_name, :feature_object_type, :feature_relation, :feature, :shape
   
   before_filter :collection
 
