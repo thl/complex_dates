@@ -2,6 +2,7 @@
 	<legend>
 		Gregorian Date Range
 		<%= edit_item_link @time_unit %>
+		<%= delete_item_link @time_unit %>
 	</legend>	
 <%= render :partial => 'admin/time_units/frequency', :locals => {:frequency => @time_unit.frequency} %>
 	<fieldset class="complex-date">
