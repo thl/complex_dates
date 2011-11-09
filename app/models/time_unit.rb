@@ -2,7 +2,7 @@ class TimeUnit < ActiveRecord::Base
   extend IsNotable
   
   belongs_to :dateable, :polymorphic=>true
-  belongs_to :calendar
+  # belongs_to :calendar
   belongs_to :date, :class_name => "ComplexDate"
   belongs_to :start_date, :class_name => "ComplexDate"
   belongs_to :end_date, :class_name => "ComplexDate"

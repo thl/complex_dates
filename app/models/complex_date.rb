@@ -1,36 +1,269 @@
 class ComplexDate < ActiveRecord::Base
-  #belongs_to :time_unit
-  belongs_to :year_certainty, :class_name => "Certainty"
-  belongs_to :season
-  belongs_to :season_end, :class_name => "Season"
-  belongs_to :season_certainty, :class_name => "Certainty"
-  belongs_to :month_certainty, :class_name => "Certainty"
-  belongs_to :day_certainty, :class_name => "Certainty"
-  belongs_to :day_of_week
-  belongs_to :day_of_week_end, :class_name => "DayOfWeek"
-  belongs_to :day_of_week_certainty, :class_name => "Certainty"
-  belongs_to :time_of_day
-  belongs_to :time_of_day_end, :class_name => "TimeOfDay"
-  belongs_to :time_of_day_certainty, :class_name => "Certainty"
-  belongs_to :hour_certainty, :class_name => "Certainty"
-  belongs_to :minute_certainty, :class_name => "Certainty"
-  belongs_to :animal
-  belongs_to :animal_certainty, :class_name => "Certainty"
-  belongs_to :calendrical
-  belongs_to :calendrical_certainty, :class_name => "Certainty"
-  belongs_to :element
-  belongs_to :element_certainty, :class_name => "Certainty"
-  belongs_to :gender
-  belongs_to :gender_certainty, :class_name => "Certainty"
-  belongs_to :intercalary_month
-  belongs_to :intercalary_month_end, :class_name => "IntercalaryMonth"
-  belongs_to :intercalary_day
-  belongs_to :intercalary_day_end, :class_name => "IntercalaryDay"
-  belongs_to :rabjung
-  belongs_to :rabjung_end, :class_name => "Rabjung"
-  belongs_to :rabjung_certainty, :class_name => "Certainty"
+  belongs_to :time_unit
+  #belongs_to :year_certainty, :class_name => "Certainty"
+  #belongs_to :season
+  #belongs_to :season_end, :class_name => "Season"
+  #belongs_to :season_certainty, :class_name => "Certainty"
+  #belongs_to :month_certainty, :class_name => "Certainty"
+  #belongs_to :day_certainty, :class_name => "Certainty"
+  #belongs_to :day_of_week
+  #belongs_to :day_of_week_end, :class_name => "DayOfWeek"
+  #belongs_to :day_of_week_certainty, :class_name => "Certainty"
+  #belongs_to :time_of_day
+  #belongs_to :time_of_day_end, :class_name => "TimeOfDay"
+  #belongs_to :time_of_day_certainty, :class_name => "Certainty"
+  #belongs_to :hour_certainty, :class_name => "Certainty"
+  #belongs_to :minute_certainty, :class_name => "Certainty"
+  #belongs_to :animal
+  #belongs_to :animal_certainty, :class_name => "Certainty"
+  #belongs_to :calendrical
+  #belongs_to :calendrical_certainty, :class_name => "Certainty"
+  #belongs_to :element
+  #belongs_to :element_certainty, :class_name => "Certainty"
+  #belongs_to :gender
+  #belongs_to :gender_certainty, :class_name => "Certainty"
+  #belongs_to :intercalary_month
+  #belongs_to :intercalary_month_end, :class_name => "IntercalaryMonth"
+  #belongs_to :intercalary_day
+  #belongs_to :intercalary_day_end, :class_name => "IntercalaryDay"
+  #belongs_to :rabjung
+  #belongs_to :rabjung_end, :class_name => "Rabjung"
+  #belongs_to :rabjung_certainty, :class_name => "Certainty"
   
   before_validation :set_certainty_of_blank_fields
+  
+  def year_certainty
+    self.year_certainty_id.nil? ? nil : Certainty.find(self.year_certainty_id)
+  end
+
+  def year_certainty=(obj)
+    self.year_certainty_id = obj.id
+  end
+  
+  def season
+    self.season_id.nil? ? nil : Season.find(self.season_id)
+  end
+
+  def season=(obj)
+    self.season_id = obj.id
+  end
+  
+  def season_end
+    self.season_end_id.nil? ? nil : Season.find(self.season_end_id)
+  end
+
+  def season_end=(obj)
+    self.season_end_id = obj.id
+  end
+  
+  def season_certainty
+    self.season_certainty_id.nil? ? nil : Certainty.find(self.season_certainty_id)
+  end
+  
+  def season_certainty=(obj)
+    self.season_certainty_id = obj.id
+  end
+  
+  def month_certainty
+    self.month_certainty_id.nil? ? nil : Certainty.find(self.month_certainty_id)
+  end
+
+  def month_certainty=(obj)
+    self.month_certainty_id = obj.id
+  end
+  
+  def day_certainty
+    self.day_certainty_id.nil? ? nil : Certainty.find(self.day_certainty_id)
+  end
+
+  def day_certainty=(obj)
+    self.day_certainty_id = obj.id
+  end
+  
+  def day_of_week
+    self.day_of_week_id.nil? ? nil : DayOfWeek.find(self.day_of_week_id)
+  end
+
+  def day_of_week=(obj)
+    self.day_of_week_id = obj.id
+  end
+  
+  def day_of_week_end
+    self.day_of_week_end_id.nil? ? nil : DayOfWeek.find(self.day_of_week_end_id)
+  end
+
+  def day_of_week_end=(obj)
+    self.day_of_week_end_id = obj.id
+  end
+  
+  def day_of_week_certainty
+    self.day_of_week_certainty_id.nil? ? nil : Certainty.find(self.day_of_week_certainty_id)
+  end
+
+  def day_of_week_certainty=(obj)
+    self.day_of_week_certainty_id = obj.id
+  end
+
+  
+  def time_of_day
+    self.time_of_day_id.nil? ? nil : TimeOfDay.find(self.time_of_day_id)
+  end
+
+  def time_of_day=(obj)
+    self.time_of_day_id = obj.id
+  end
+  
+  def time_of_day_end
+    self.time_of_day_end_id.nil? ? nil : TimeOfDay.find(self.time_of_day_end_id)
+  end
+
+  def time_of_day_end=(obj)
+    self.time_of_day_end_id = obj.id
+  end
+  
+  def time_of_day_certainty
+    self.time_of_day_certainty_id.nil? ? nil : Certainty.find(self.time_of_day_certainty_id)
+  end
+
+  def time_of_day_certainty=(obj)
+    self.time_of_day_certainty_id = obj.id
+  end
+  
+  def hour_certainty
+    self.hour_certainty_id.nil? ? nil : Certainty.find(self.hour_certainty_id)
+  end
+
+  def hour_certainty=(obj)
+    self.hour_certainty_id = obj.id
+  end
+  
+  def minute_certainty
+    self.minute_certainty_id.nil? ? nil : Certainty.find(self.minute_certainty_id)
+  end
+  
+  def minute_certainty=(obj)
+    self.minute_certainty_id = obj.id
+  end
+  
+  def animal
+    self.animal_id.nil? ? nil : Animal.find(self.animal_id)
+  end
+
+  def animal=(obj)
+    self.animal_id = obj.id
+  end
+  
+  def animal_certainty
+    self.animal_certainty_id.nil? ? nil : Certainty.find(self.animal_certainty_id)
+  end
+
+  def animal_certainty=(obj)
+    self.animal_certainty_id = obj.id
+  end
+  
+  def calendrical
+    self.calendrical_id.nil? ? nil : Calendrical.find(self.calendrical_id)
+  end
+
+  def calendrical=(obj)
+    self.calendrical_id = obj.id
+  end
+  
+  def calendrical_certainty
+    self.calendrical_certainty_id.nil? ? nil : Certainty.find(self.calendrical_certainty_id)
+  end
+
+  def calendrical_certainty=(obj)
+    self.calendrical_certainty_id = obj.id
+  end
+  
+  def element
+    self.element_id.nil? ? nil : Element.find(self.element_id)
+  end
+
+  def element=(obj)
+    self.element_id = obj.id
+  end
+  
+  def element_certainty
+    self.element_certainty_id.nil? ? nil : Certainty.find(self.element_certainty_id)
+  end
+
+  def element_certainty=(obj)
+    self.element_certainty_id = obj.id
+  end
+  
+  def gender
+    self.gender_id.nil? ? nil : Gender.find(self.gender_id)
+  end
+
+  def gender=(obj)
+    self.gender_id = obj.id
+  end
+  
+  def gender_certainty
+    self.gender_certainty_id.nil? ? nil : Certainty.find(self.gender_certainty_id)
+  end
+
+  def gender_certainty=(obj)
+    self.gender_certainty_id = obj.id
+  end
+  
+  def intercalary_month
+    self.intercalary_month_id.nil? ? nil : IntercalaryMonth.find(self.intercalary_month_id)
+  end
+
+  def intercalary_month=(obj)
+    self.intercalary_month_id = obj.id
+  end
+  
+  def intercalary_month_end
+    self.intercalary_month_end_id.nil? ? nil : IntercalaryMonth.find(self.intercalary_month_end_id)
+  end
+
+  def intercalary_month_end=(obj)
+    self.intercalary_month_end_id = obj.id
+  end
+  
+  def intercalary_day
+    self.intercalary_day_id.nil? ? nil : IntercalaryDay.find(self.intercalary_day_id)
+  end
+
+  def intercalary_day=(obj)
+    self.intercalary_day_id = obj.id
+  end
+  
+  def intercalary_day_end
+    self.intercalary_day_end_id.nil? ? nil : IntercalaryDay.find(self.intercalary_day_end_id)
+  end
+
+  def intercalary_day_end=(obj)
+    self.intercalary_day_end_id = obj.id
+  end
+  
+  def rabjung
+    self.rabjung_id.nil? ? nil : Rabjung.find(self.rabjung_id)
+  end
+  
+  def rabjung=(obj)
+    self.rabjung_id = obj.id
+  end
+  
+  def rabjung_end
+    self.rabjung_end_id.nil? ? nil : Rabjung.find(self.rabjung_end_id)
+  end
+
+  def rabjung_end=(obj)
+    self.rabjung_end_id = obj.id
+  end
+  
+  def rabjung_certainty
+    self.rabjung_certainty_id.nil? ? nil : Certainty.find(self.rabjung_certainty_id)
+  end
+  
+  def rabjung_certainty=(obj)
+    self.rabjung_certainty_id = obj.id
+  end
   
   def after_initialize
     set_default_values
