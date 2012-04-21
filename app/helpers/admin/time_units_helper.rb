@@ -51,7 +51,7 @@ module Admin::TimeUnitsHelper
     
     html += "</p>"
     
-    html
+    html.html_safe
   end
   
   def complex_date_text_field(form_builder, field_name, show_end=true, options={})
@@ -80,7 +80,7 @@ module Admin::TimeUnitsHelper
     
     html += "</p>"
     
-    html
+    html.html_safe
   end
 
   def complex_date_fields(field_html, certainty_html, end_html=nil)
@@ -94,6 +94,7 @@ module Admin::TimeUnitsHelper
       html += end_html
     end
     html += "</p>"
+    html.html_safe
   end
   
   def complex_date_display_field(complex_date, field_name, show_end=true, options={})
@@ -124,7 +125,7 @@ module Admin::TimeUnitsHelper
     
     html += "</div>"
     
-    html
+    html.html_safe
   end
     
   def date_options_for(field_name)

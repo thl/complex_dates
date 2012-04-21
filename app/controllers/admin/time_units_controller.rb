@@ -74,7 +74,7 @@ class Admin::TimeUnitsController < ResourceController::Base
   def collection
     @parent_object ||= parent_object
     if parent?
-      TimeUnit.send(:with_scope, :find=>{:conditions=>['dateable_id = ? AND dateable_type = ?', @parent_object.id, @parent_object.class.base_class.to_s]}) do
+      TimeUnit.send(:with_scope, :find=> where(['dateable_id = ? AND dateable_type = ?', @parent_object.id, @parent_object.class.base_class.to_s])) do
         @collection = TimeUnit.search(params[:filter], :page=>params[:page])
       end
     else
