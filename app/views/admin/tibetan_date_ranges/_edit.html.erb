@@ -1,5 +1,4 @@
-<% form_for @time_unit, :url => {:action => 'create'} do |f| %>
-
+<%= form_for @time_unit, :url => {:action => 'create'} do |f| %>
 <%= f.hidden_field :calendar_id %>
 <%= f.hidden_field :is_range %>
 <div>
@@ -17,9 +16,6 @@
 		<legend>End</legend>
 		<%= render :partial => "admin/tibetan_dates/form_fields", :locals => {:f => f, :object_name => :end_date} %>
 	</fieldset>
-
 </fieldset>
-
 <% end %>
-
 <%= render :partial => "admin/time_units/remove_form_tag" %>

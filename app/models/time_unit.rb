@@ -47,7 +47,7 @@ class TimeUnit < ActiveRecord::Base
     order = 'time_units.calendar_id ASC, '
     complex_date_fields = %w[rabjung_id year season_id month day hour minute]
     order += complex_date_fields.collect{|field| "complex_dates.#{field} DESC"}.join(", ")
-    self.find(:all, :conditions => conditions, :order => order, :include=>[:date, :end_date])
+    self.where(conditions).order(order).includes([:date, :end_date])
   end
     
   def self.search(filter_value, options={})

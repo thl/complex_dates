@@ -7,7 +7,7 @@ class Admin::TimeUnitsController < ResourceController::Base
   destroy.wants.html { redirect_to polymorphic_url([:admin, object.dateable]) }
  
   def index
-    @time_units = TimeUnit.find(:all)
+    @time_units = TimeUnit.all
   end
   
   def show
