@@ -48,25 +48,7 @@ class TimeUnit < ActiveRecord::Base
     complex_date_fields = %w[rabjung_id year season_id month day hour minute]
     order += complex_date_fields.collect{|field| "complex_dates.#{field} DESC"}.join(", ")
     self.where(conditions).order(order).includes([:date, :end_date])
-  end
-    
-  def self.search(filter_value, options={})
-    options[:conditions] = {}
-    #build_like_conditions(
-    #  %W(notes.content notes.custom_note_title note_titles.title),
-    #  filter_value
-    #)
-    paginate(options)
-  end
-  
-  def search(filter_value, options={})
-    options[:conditions] = {}
-    #build_like_conditions(
-    #  %W(notes.content notes.custom_note_title note_titles.title),
-    #  filter_value
-    #)
-    paginate(options)
-  end
+  end    
 end
 
 # == Schema Info
