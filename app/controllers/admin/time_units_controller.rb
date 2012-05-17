@@ -47,23 +47,20 @@ class Admin::TimeUnitsController < ResourceController::Base
   
   def new_form
     date_model = params[:date_model]
-    
     @time_unit = TimeUnit.new
-    
     # These two attributes are necessary for setting the time_unit[calendar_id]
     # and time_unit[is_range] fields in the _edit partial.
     @time_unit.calendar_id = date_model.constantize.new.calendar_id
     @time_unit.is_range = date_model.constantize.new.is_range
-    
     if @time_unit.is_range
       @time_unit.start_date = ComplexDate.new
       @time_unit.end_date = ComplexDate.new
     else
       @time_unit.date = ComplexDate.new
     end
-    render :partial => "admin/#{date_model.tableize}/edit"
+    @date_table = date_model.tableize
+    # renders new_form.js.erb
   end
-  
   protected
   
   def parent_association

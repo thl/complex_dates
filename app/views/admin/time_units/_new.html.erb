@@ -19,12 +19,13 @@
 		<%= f.submit "Create" %> | <%= link_to 'Cancel', collection_path %>
 	</div>
 <% end %>
-<%= observe_field 'point_range_select', 
-	:url => {:action => 'new_form', :controller => "admin/time_units"},
-	:method => 'get',
-	:with => "'date_model='+$('#date_type_select').val()+$('#point_range_select').val()",
-	:update => "date_form_wrapper",
-	:after => "$('#submit_button').show()" %>
+<%= javascript_on_load do %>
+      $('#submit_button').show();
+      $("#point_range_select").change(function() {
+        date_model = $('#date_type_select').val() + $('#point_range_select').val();
+        $.get('<%= url_for :action => 'new_form', :controller => 'admin/time_units' %>?date_model=' + date_model);
+      });
+<%  end %>
 <script type="text/javascript">
 // This can be used during development to automatically select a date type for testing purposes.
 // It should be removed when this plugin is in a more stable form

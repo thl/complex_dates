@@ -1,5 +1,5 @@
-<% f.fields_for object_name do |date_form|
-     date_form.object = @time_unit.send(object_name) unless @time_unit.send(object_name).nil? %>
+<%= f.fields_for object_name do |date_form| %>
+<%   date_form.object = @time_unit.send(object_name) unless @time_unit.send(object_name).nil? %>
 <%=  complex_date_text_field date_form, :year %>
 <%=  complex_date_select date_form, :month, true, :collection => date_options_for(:month) %>
 <%=  complex_date_select date_form, :day, true, :collection => date_options_for(:gregorian_day) %>
