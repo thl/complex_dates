@@ -153,8 +153,4 @@ module Admin::TimeUnitsHelper
   def format_minute(minute)
     "%02d" % minute
   end
-
-  def stylesheet_files
-    super + ['complex_dates']
-  end  
 end

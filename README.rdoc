@@ -1,4 +1,4 @@
-== Complex Dates
+= Complex Dates
 
 The Complex Dates plugin allows other models to be associated with Gregorian or Tibetan
 dates or date ranges. Complex Dates' helpers, views, and controllers are currently namespaced
