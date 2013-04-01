@@ -8,8 +8,8 @@
 
 	<tr>
 		<th class="listActionsCol"></th>
-		<%= "<th>Type</th>" unless options[:hide_type] %>
-		<%= "<th>Type Value</th>" unless options[:hide_type_value] %>
+		<%= "<th>Type</th>".html_safe unless options[:hide_type] %>
+		<%= "<th>Type Value</th>".html_safe unless options[:hide_type_value] %>
 		<th>Date</th>
 	</tr>
 
@@ -26,9 +26,9 @@
 		  ) %>
 		</td>
 		
-		<%= "<td>#{item.dateable_type.titleize}</td>" unless options[:hide_type] %>
+		<%= "<td>#{item.dateable_type.titleize}</td>".html_safe unless options[:hide_type] %>
 		
-		<%= "<td>#{item.dateable}</td>" unless options[:hide_type_value] %>
+		<%= "<td>#{item.dateable}</td>".html_safe unless options[:hide_type_value] %>
 		
 		<td><%= item.to_s %></td>
 

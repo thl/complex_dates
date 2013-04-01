@@ -7,9 +7,8 @@ class TimeUnit < ActiveRecord::Base
   belongs_to :start_date, :class_name => "ComplexDate"
   belongs_to :end_date, :class_name => "ComplexDate"
   
-  accepts_nested_attributes_for :date
-  accepts_nested_attributes_for :end_date
-  accepts_nested_attributes_for :start_date
+  attr_accessible :is_range, :is_range, :calendar_id, :frequency_id, :date_attributes, :end_date_attributes, :start_date_attributes
+  accepts_nested_attributes_for :date, :end_date, :start_date
 
   def to_s
     s = is_range ? "#{start_date} - #{end_date}" : date.to_s

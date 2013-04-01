@@ -1,5 +1,9 @@
 class ComplexDate < ActiveRecord::Base
-  belongs_to :time_unit
+  attr_accessible :year_end, :minute_certainty_id, :year, :day_of_week_certainty_id, :season_certainty_id,
+    :hour_end, :month, :day_end, :season_end_id, :hour_certainty_id, :day_certainty_id, :year_certainty_id,
+    :hour, :day, :minute_end, :time_of_day_end_id, :day_of_week_id, :time_of_day_certainty_id,
+    :time_of_day_id, :month_certainty_id, :month_end, :day_of_week_end_id, :season_id, :minute
+
   #belongs_to :year_certainty, :class_name => "Certainty"
   #belongs_to :season
   #belongs_to :season_end, :class_name => "Season"
