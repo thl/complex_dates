@@ -1,5 +1,5 @@
 class TimeUnit < ActiveRecord::Base
-  extend IsNotable
+  include CulturalNetwork::IsNotable
   
   belongs_to :dateable, :polymorphic=>true
   # belongs_to :calendar

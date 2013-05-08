@@ -1,6 +1,4 @@
 module Admin::TimeUnitsHelper
-  include AdminHelper
- 
   def complex_date_select(form_builder, field_name, show_end=true, options={})
     field_name_str = field_name.to_s
     field_type = field_name_str.sub(/_id$/, '')
