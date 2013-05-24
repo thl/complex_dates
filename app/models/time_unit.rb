@@ -1,5 +1,5 @@
 class TimeUnit < ActiveRecord::Base
-  include CulturalNetwork::IsNotable
+  include KmapsEngine::IsNotable
   
   belongs_to :dateable, :polymorphic=>true
   # belongs_to :calendar
