@@ -36,18 +36,14 @@ module IsDateable
         end
       end
       
-      #
-      #
-      #
-      def time_units_ordered_by_date(descending=true)
-        if descending
-          TimeUnit.find_ordered_by_date({:dateable_id => id, :dateable_type => self.class.base_class.name})
-        else
-          # Not implemented yet (as it currently isn't needed).
-        end
+      # This is currently fairly rudimentary, as it isn't being put to important use yet.
+      # Currently, it sorts all Gregorian dates before all Tibetan dates, then sorts by the
+      # fields listed below of either date or end_date, depending on whether the TimeUnit
+      # is a point or range.
+      def time_units_ordered_by_date
+        order_array = ['time_units.calendar_id ASC'] + %w[rabjung_id year season_id month day hour minute].collect{|field| "complex_dates.#{field} DESC"}
+        self.time_units.order(order_array.join(', ')).includes([:date, :end_date])
       end
-      
     end
   end
-  
 end
