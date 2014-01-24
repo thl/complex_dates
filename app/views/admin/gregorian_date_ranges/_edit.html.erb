@@ -1,4 +1,7 @@
+<%= fields_for @time_unit do |f| %>
 <div>
+<%= f.hidden_field :calendar_id %>
+<%= f.hidden_field :is_range %>
 <%= f.label :frequency %><br/>
 <%= f.collection_select(:frequency_id, GregorianFrequency.options, :id, :title, { :include_blank => true }) %>
 </div><br/>
@@ -13,3 +16,4 @@
 <%= render :partial => "admin/gregorian_dates/form_fields", :locals => {:f => f, :object_name => :end_date} %>
 	</fieldset>
 </fieldset>
+<% end %>
