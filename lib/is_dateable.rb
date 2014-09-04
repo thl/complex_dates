@@ -42,7 +42,7 @@ module IsDateable
       # is a point or range.
       def time_units_ordered_by_date
         order_array = ['time_units.calendar_id ASC'] + %w[rabjung_id year season_id month day hour minute].collect{|field| "complex_dates.#{field} DESC"}
-        self.time_units.order(order_array.join(', ')).includes([:date, :end_date])
+        self.time_units.order(order_array.join(', ')).includes([:date, :end_date]).references([:date, :end_date])
       end
     end
   end

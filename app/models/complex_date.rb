@@ -1,12 +1,4 @@
 class ComplexDate < ActiveRecord::Base
-  attr_accessible :year_end, :minute_certainty_id, :year, :day_of_week_certainty_id, :season_certainty_id,
-    :hour_end, :month, :day_end, :season_end_id, :hour_certainty_id, :day_certainty_id, :year_certainty_id,
-    :hour, :day, :minute_end, :time_of_day_end_id, :day_of_week_id, :time_of_day_certainty_id,
-    :time_of_day_id, :month_certainty_id, :month_end, :day_of_week_end_id, :season_id, :minute,
-    :calendrical_certainty_id, :rabjung_certainty_id, :element_certainty_id, :animal_id, :intercalary_day_id,
-    :intercalary_month_end_id, :intercalary_day_end_id, :gender_certainty_id, :element_id, :rabjung_id,
-    :rabjung_end_id, :animal_certainty_id, :calendrical_id, :gender_id, :intercalary_month_id
-
   #belongs_to :year_certainty, :class_name => "Certainty"
   #belongs_to :season
   #belongs_to :season_end, :class_name => "Season"

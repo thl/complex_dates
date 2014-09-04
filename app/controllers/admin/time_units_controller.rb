@@ -2,7 +2,7 @@ class Admin::TimeUnitsController < ResourceController::Base
   
   belongs_to :altitude, :category_feature, :description, :feature_geo_code, :feature_name, :feature_object_type, :feature_relation, :feature, :shape
   
-  before_filter :collection
+  before_action :collection
 
   destroy.wants.html { redirect_to polymorphic_url([:admin, object.dateable]) }
  
@@ -77,4 +77,18 @@ class Admin::TimeUnitsController < ResourceController::Base
     end
   end  
   
+  private
+  def time_unit_params
+    date_attributes = [:year_end, :minute_certainty_id, :year, :day_of_week_certainty_id, :season_certainty_id,
+    :hour_end, :month, :day_end, :season_end_id, :hour_certainty_id, :day_certainty_id, :year_certainty_id,
+    :hour, :day, :minute_end, :time_of_day_end_id, :day_of_week_id, :time_of_day_certainty_id,
+    :time_of_day_id, :month_certainty_id, :month_end, :day_of_week_end_id, :season_id, :minute,
+    :calendrical_certainty_id, :rabjung_certainty_id, :element_certainty_id, :animal_id, :intercalary_day_id,
+    :intercalary_month_end_id, :intercalary_day_end_id, :gender_certainty_id, :element_id, :rabjung_id,
+    :rabjung_end_id, :animal_certainty_id, :calendrical_id, :gender_id, :intercalary_month_id]
+    
+    params.require(:time_unit).permit(:is_range, :is_range, :calendar_id, :frequency_id, :date_attributes,
+    :end_date_attributes, :start_date_attributes, :start_date_id, :end_date_id, :date_id, :dateable_type, :dateable_id,
+    date_attributes: date_attributes, end_date_attributes: date_attributes, start_date_attributes: date_attributes)
+  end
 end
