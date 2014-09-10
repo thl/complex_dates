@@ -314,7 +314,7 @@ class ComplexDate < ActiveRecord::Base
   
   # It wasn't clear how to set up this association, so it's done manually:
   def time_unit
-    TimeUnit.where(["date_id = ? OR start_date_id = ? OR end_date_id = ?", id, id, id]).first
+    TimeUnit.find_by(["date_id = ? OR start_date_id = ? OR end_date_id = ?", id, id, id])
   end
   
   # Methods beginning with "formatted_" return the formatted version of groups of fields that are separated by
