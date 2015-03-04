@@ -6,6 +6,8 @@ class TimeUnit < ActiveRecord::Base
   belongs_to :date, :class_name => 'ComplexDate'
   belongs_to :start_date, :class_name => 'ComplexDate'
   belongs_to :end_date, :class_name => 'ComplexDate'
+  accepts_nested_attributes_for :date, :start_date, :end_date
+  
   has_many :imports, :as => 'item', :dependent => :destroy
   
   def to_s
