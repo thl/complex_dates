@@ -37,6 +37,75 @@ class TimeUnit < ActiveRecord::Base
     else Frequency.find(self.frequency_id)
     end
   end
+  
+  def range_equal?(range)
+    return nil if !self.is_range?
+    self.start_date==range[0] && self.end_date==range[1]
+  end
+  
+  def between?(obj, obj2)
+    if obj.nil?
+      if obj2.nil?
+        return false
+      else
+        if self.is_range?
+          if self.start_date.nil?
+            if self.end_date.nil?
+              return false
+            else
+              # return true for mathematical comparisons, but here being more practical
+              self.end_date<=obj2
+            end
+          else
+            self.start_date<=obj2
+          end
+        else
+          self.date<=obj2
+        end
+      end
+    else
+      if obj2.nil?
+        if self.is_range?
+          if self.start_date.nil?
+            if self.end_date.nil?
+              return false
+            else
+              self.end_date>=obj
+            end
+          else
+            if self.end_date.nil?
+              # return true
+              self.start_date>=obj
+            else
+              self.end_date>=obj
+            end
+          end
+        else
+          self.date>=obj
+        end
+      else
+        if self.is_range?
+          if self.start_date.nil?
+            if self.end_date.nil?
+              return false
+            else
+              #self.end_date>=obj
+              self.end_date.between?(obj, obj2)
+            end
+          else
+            if self.end_date.nil?
+              # self.start_date<=obj2
+              self.start_date.between?(obj, obj2)
+            else
+              self.start_date.between?(obj, obj2) || self.end_date.between?(obj, obj2)
+            end
+          end
+        else
+          self.date.between?(obj, obj2)
+        end
+      end
+    end
+  end
 end
 
 # == Schema Info

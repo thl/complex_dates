@@ -30,6 +30,7 @@ class ComplexDate < ActiveRecord::Base
   #belongs_to :rabjung_certainty, :class_name => "Certainty"
   
   before_validation :set_certainty_of_blank_fields
+  include Comparable
   
   def year_certainty
     self.year_certainty_id.nil? ? nil : Certainty.find(self.year_certainty_id)
@@ -506,6 +507,26 @@ class ComplexDate < ActiveRecord::Base
     f += "-#{end_value}" unless end_value.nil?
     f += " (#{certainty_value.to_s.downcase})" unless (certainty_value.blank? || certainty_value.to_s.eql?("Certain"))
     f
+  end
+  
+  def <=>(obj)
+    if obj.class.superclass == Integer
+      return self.year <=> obj
+    elsif obj.instance_of? String
+      self <=> Importation.to_date(obj)
+    else
+      obj.instance_of? ComplexDate
+      comp = self.year <=> obj.year
+      return comp if comp!=0
+      comp = self.month <=> obj.month
+      return comp if comp!=0
+      comp = self.day <=> obj.day
+      return comp if comp!=0
+      comp = self.hour <=> obj.hour
+      return comp if comp!=0
+      comp = self.minute <=> obj.minute
+      return comp if comp!=0
+    end
   end
 end
 
