@@ -44,6 +44,7 @@ class TimeUnit < ActiveRecord::Base
   end
   
   def between?(obj, obj2)
+    return false if self.calendar_id != 1 # Only gregorian calendars supported
     if obj.nil?
       if obj2.nil?
         return false
