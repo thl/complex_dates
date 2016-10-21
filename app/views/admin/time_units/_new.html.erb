@@ -1,29 +1,29 @@
 <%= javascript_include_tag "complex_dates/application" %>
-<%= form_for @time_unit, :url => {:action => 'create'} do |f| %>
+<%= form_for @time_unit, url: {action: 'create'} do |f| %>
 	<%= f.hidden_field :dateable_id %>
 	<%= f.hidden_field :dateable_type %>
 	<fieldset class="time-unit">
 		<legend>Choose Date</legend>
 		<div>
 			<%= label :date_type_select, "Calendar Type" %><br/>
-			<%= select_tag(:date_type_select, options_for_select([['',''],['Tibetan','Tibetan'],['Gregorian','Gregorian']]),  {:style => 'width:150px'}) %>
+			<%= select_tag(:date_type_select, options_for_select([['',''],['Tibetan','Tibetan'],['Gregorian','Gregorian']]),  {:style => 'width:150px', class: 'form-control form-select ss-select selectpicker'}) %>
 		</div>
 		<div>
 			<%= f.label :point_range_select, "Date Type" %><br/>
-			<%= select_tag(:point_range_select, options_for_select([['',''],["Point","Date"],["Range","DateRange"]]), {:style => 'width:150px'}) %>
+			<%= select_tag(:point_range_select, options_for_select([['',''],["Point","Date"],["Range","DateRange"]]), {:style => 'width:150px', class: 'form-control form-select ss-select selectpicker'}) %>
 		</div>
 		<br />
 		<div id="date_form_wrapper"></div>
 	</fieldset>
 	<div id="submit_button"  style="display: none; clear: both;">
-		<%= f.submit "Create" %> | <%= link_to 'Cancel', collection_path %>
+		<%= f.submit "Create", class: 'btn btn-primary form-submit' %> | <%= link_to 'Cancel', collection_path, class: 'btn btn-primary form-submit', id: 'edit-cancel' %>
 	</div>
 <% end %>
 <%= javascript_on_load do %>
       $('#submit_button').show();
       $("#point_range_select").change(function() {
         date_model = $('#date_type_select').val() + $('#point_range_select').val();
-        $.get('<%= url_for :action => 'new_form', :controller => 'admin/time_units' %>?date_model=' + date_model);
+        $.get('<%= url_for action: 'new_form', controller: 'admin/time_units' %>?date_model=' + date_model);
       });
 <%  end %>
 <script type="text/javascript">

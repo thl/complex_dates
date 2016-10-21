@@ -1,14 +1,14 @@
 <%= javascript_include_tag "complex_dates/application" %>
-<%= form_for @time_unit, :url => {:id => @time_unit.id, :action => 'update'} do |f| %>
+<%= form_for @time_unit, url: {id: @time_unit.id, action: 'update'} do |f| %>
 	<fieldset class="time-unit">
       <legend>Edit Date</legend>
       <div id="date_form_wrapper">
 <%=     f.hidden_field :calendar_id %>
 <%=     f.hidden_field :is_range %>
-<%=     render :partial => "admin/#{@time_unit.date_model.tableize}/edit", :locals => {:f => f} %>
+<%=     render partial: "admin/#{@time_unit.date_model.tableize}/edit", locals: {f: f} %>
       </div>
       <div style="clear: both;">
-<%=     f.submit "Update" %> | <%= link_to 'Cancel', collection_path %>
+<%=     f.submit "Update", class: 'btn btn-primary form-submit' %> | <%= link_to 'Cancel', collection_path, class: 'btn btn-primary form-submit', id: 'edit-cancel' %>
       </div>
     </fieldset>
 <%  end %>
