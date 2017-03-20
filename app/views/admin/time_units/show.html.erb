@@ -1,3 +1,10 @@
 <%= render :partial => 'top' rescue nil %>
+<section class="panel panel-content">
+  <div class="panel-heading">
+    <h6><%= ts('Date')%></h6>
+  </div>
+  <div class="panel-body">
 <%= render :partial => 'show' %>
 <%= render :partial => 'bottom' rescue nil %>
+  </div> <!-- END panel-body -->
+</section> <!-- END panel -->
