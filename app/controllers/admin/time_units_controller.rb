@@ -15,7 +15,7 @@ class Admin::TimeUnitsController < ResourceController::Base
   end
   
   def new
-    @time_unit = @parent_object.time_units.new
+    @time_unit = parent_object.time_units.new
   end
   
   def edit
@@ -64,14 +64,12 @@ class Admin::TimeUnitsController < ResourceController::Base
   protected
   
   def parent_association
-    @parent_object ||= parent_object
     parent_object.time_units # ResourceController needs this for the parent association
   end
   
   def collection
-    @parent_object ||= parent_object
     if parent?
-      @collection = TimeUnit.where(['dateable_id = ? AND dateable_type = ?', @parent_object.id, @parent_object.class.base_class.to_s]).page(params[:page])
+      @collection = TimeUnit.where(['dateable_id = ? AND dateable_type = ?', parent_object.id, parent_object.class.base_class.to_s]).page(params[:page])
     else
       @collection = TimeUnit.page(params[:page])
     end
