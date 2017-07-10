@@ -23,7 +23,7 @@ class Admin::TimeUnitsController < ResourceController::Base
   end
   
   def create
-    @time_unit = TimeUnit.new(params[:time_unit])
+    @time_unit = TimeUnit.new(time_unit_params)
     if @time_unit.is_range
       @time_unit.start_date.save
       @time_unit.end_date.save
