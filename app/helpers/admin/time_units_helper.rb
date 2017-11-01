@@ -96,6 +96,7 @@ module Admin::TimeUnitsHelper
   end
   
   def complex_date_display_field(complex_date, field_name, show_end=true, options={})
+    return "" if complex_date.nil?
     field_name_str = field_name.to_s
     field_type = field_name_str
     
