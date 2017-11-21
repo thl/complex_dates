@@ -38,8 +38,7 @@ class Admin::TimeUnitsController < ResourceController::Base
   
   def update
     @time_unit = TimeUnit.find(params[:id])
-    #@time_unit.update_attributes params[:time_unit]
-    @time_unit.update! time_unit_params
+    @time_unit.update_attributes(time_unit_params)
     if @time_unit.save
       flash[:notice] = 'Date successfully updated.'
     end

@@ -3,17 +3,19 @@
 <%= f.hidden_field :calendar_id %>
 <%= f.hidden_field :is_range %>
 <%= f.label :frequency %><br/>
-<%= f.collection_select(:frequency_id, GregorianFrequency.options, :id, :title, { :include_blank => true }) %>
+<%= f.collection_select(:frequency_id, GregorianFrequency.options, :id, :title, { include_blank: true }) %>
 </div><br/>
 <fieldset class="complex-date-range">
   <legend>Gregorian Date Range</legend>
   <fieldset class="complex-date">
     <legend>Start</legend>
-<%= render :partial => "admin/gregorian_dates/form_fields", :locals => {:f => f, :object_name => :start_date} %>
+<%  @time_unit.start_date = GregorianDate.new if @time_unit.start_date.nil? %>
+<%= render partial: 'admin/gregorian_dates/form_fields', locals: {f: f, object_name: :start_date} %>
     </fieldset>
   <fieldset class="complex-date">
     <legend>End</legend>
-<%= render :partial => "admin/gregorian_dates/form_fields", :locals => {:f => f, :object_name => :end_date} %>
+<%  @time_unit.end_date = GregorianDate.new if @time_unit.end_date.nil? %>
+<%= render partial: 'admin/gregorian_dates/form_fields', locals: {f: f, object_name: :end_date} %>
 	</fieldset>
 </fieldset>
 <% end %>

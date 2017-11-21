@@ -4,6 +4,9 @@
 		<%= edit_item_link @time_unit %>
 		<%= delete_item_link @time_unit %>
 	</legend>
-<%= render :partial => 'admin/time_units/frequency', :locals => {:frequency => @time_unit.frequency} %>
-<%= render :partial => "admin/gregorian_dates/show_fields", :locals => {:object_name => :date} %>
+<%= render partial: 'admin/time_units/frequency', locals: { frequency: @time_unit.frequency } %>
+<%  date = @time_unit.date
+    if !date.nil? %>
+<%=   render partial: 'admin/gregorian_dates/show_fields', locals: { complex_date: date } %>
+<%  end %>
 </fieldset>

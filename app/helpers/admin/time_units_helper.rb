@@ -96,13 +96,10 @@ module Admin::TimeUnitsHelper
   end
   
   def complex_date_display_field(complex_date, field_name, show_end=true, options={})
-    return "" if complex_date.nil?
     field_name_str = field_name.to_s
     field_type = field_name_str
-    
     display_field_name = (field_name_str =~ /_id$/ ? field_name_str.sub(/_id$/, "") : field_name_str).to_sym
     field_value = complex_date.send(display_field_name)
-	
     certainty_field_name = ("#{display_field_name}_certainty").to_sym
     html = ""
     html += "<div class='row'>"
