@@ -1,4 +1,4 @@
-class AddFrequencyIdToTimeUnit < ActiveRecord::Migration
+class AddFrequencyIdToTimeUnit < ActiveRecord::Migration[5.2]
   def self.up
     add_column :time_units, :frequency_id, :integer
   end

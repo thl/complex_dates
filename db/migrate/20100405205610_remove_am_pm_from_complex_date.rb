@@ -1,4 +1,4 @@
-class RemoveAmPmFromComplexDate < ActiveRecord::Migration
+class RemoveAmPmFromComplexDate < ActiveRecord::Migration[5.2]
   def self.up
     remove_column :complex_dates, :am_pm_id
     remove_column :complex_dates, :am_pm_certainty_id

@@ -1,4 +1,4 @@
-class AddEndFieldsToComplexDate < ActiveRecord::Migration
+class AddEndFieldsToComplexDate < ActiveRecord::Migration[5.2]
   def self.up
     add_column :complex_dates, :year_end, :integer
     add_column :complex_dates, :season_end_id, :integer

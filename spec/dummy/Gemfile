@@ -1,0 +1,4 @@
+gem 'passiverecord',              '0.2',          github: 'ambethia/passiverecord'
+group :test do
+  gem 'sqlite3'
+end
