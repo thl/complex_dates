@@ -1,4 +1,4 @@
-class CreateComplexDates < ActiveRecord::Migration
+class CreateComplexDates < ActiveRecord::Migration[5.2]
   def self.up
     create_table :complex_dates do |t|
       t.integer :year

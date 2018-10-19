@@ -1,4 +1,4 @@
-class CreateTimeUnits < ActiveRecord::Migration
+class CreateTimeUnits < ActiveRecord::Migration[5.2]
   def self.up
     create_table :time_units do |t|
       t.integer :date_id
