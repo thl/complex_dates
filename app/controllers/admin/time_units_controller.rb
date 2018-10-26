@@ -16,6 +16,7 @@ class Admin::TimeUnitsController < ResourceController::Base
   
   def new
     @time_unit = parent_object.time_units.new
+    @time_unit.dateable_type = parent_object.class.name
   end
   
   def edit
