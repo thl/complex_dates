@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   #s.add_dependency 'passiverecord', '0.2'
   s.add_development_dependency 'rspec-rails'
   # Use postgresql as the database for Active Record
-  s.add_dependency 'pg', '~> 0.18'
+  s.add_dependency 'pg'
 
   # s.add_dependency "jquery-rails"
 end
