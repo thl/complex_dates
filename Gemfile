@@ -1,4 +1,5 @@
-source "http://rubygems.org"
+source "https://rubygems.org"
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 # Declare your gem's dependencies in complex_dates.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
@@ -6,7 +7,8 @@ source "http://rubygems.org"
 gemspec
 
 # jquery-rails is used by the dummy application
-gem 'jquery-rails', '>= 3.1.3'
+gem 'jquery-rails'
+gem 'rails', '~> 5.2.3'
 gem 'passiverecord', '0.2', :git => 'https://github.com/ambethia/passiverecord.git'
 gem 'pg'
 
