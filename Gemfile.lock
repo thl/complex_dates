@@ -153,7 +153,6 @@ DEPENDENCIES
   jquery-rails
   passiverecord (= 0.2)!
   pg
-  rails (~> 5.2.3)
   rspec-rails
 
 BUNDLED WITH

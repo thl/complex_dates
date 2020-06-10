@@ -8,7 +8,6 @@ gemspec
 
 # jquery-rails is used by the dummy application
 gem 'jquery-rails'
-gem 'rails', '~> 5.2.3'
 gem 'passiverecord', '0.2', :git => 'https://github.com/ambethia/passiverecord.git'
 gem 'pg'
 
