@@ -16,7 +16,7 @@
 		<div id="date_form_wrapper"></div>
 	</fieldset>
 	<div id="submit_button"  style="display: none; clear: both;">
-		<%= f.submit "Create", class: 'btn btn-primary form-submit' %> | <%= link_to 'Cancel', collection_path, class: 'btn btn-primary form-submit', id: 'edit-cancel' %>
+		<%= f.submit "Create", class: 'btn btn-primary form-submit' %> | <%= link_to 'Cancel', polymorphic_path(stacked_parents), class: 'btn btn-primary form-submit', id: 'edit-cancel' %>
 	</div>
 <% end %>
 <%= javascript_on_load do %>
