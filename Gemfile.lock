@@ -9,7 +9,7 @@ PATH
   specs:
     complex_dates (2.3.1)
       pg
-      rails (>= 4.0)
+      rails (>= 5.0)
 
 GEM
   remote: https://rubygems.org/

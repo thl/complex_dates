@@ -4,7 +4,7 @@ class Admin::TimeUnitsController < ResourceController::Base
   
   before_action :collection
 
-  destroy.wants.html { redirect_to polymorphic_url(stacked_parents) }
+  destroy.wants.html { redirect_to polymorphic_url(helpers.stacked_parents) }
  
   def index
     @time_units = TimeUnit.all
@@ -34,7 +34,7 @@ class Admin::TimeUnitsController < ResourceController::Base
     if @time_unit.save
       flash[:notice] = 'Date successfully created.'
     end
-    redirect_to polymorphic_url(stacked_parents)
+    redirect_to polymorphic_url(helpers.stacked_parents)
   end
   
   def update
@@ -43,7 +43,7 @@ class Admin::TimeUnitsController < ResourceController::Base
     if @time_unit.save
       flash[:notice] = 'Date successfully updated.'
     end
-    redirect_to polymorphic_url(stacked_parents)
+    redirect_to polymorphic_url(helpers.stacked_parents)
   end
   
   def new_form
@@ -64,15 +64,6 @@ class Admin::TimeUnitsController < ResourceController::Base
   end
   
   protected
-  
-  def stacked_parents
-    array = [:admin]
-    if !parent_object.instance_of?(Feature) && parent_object.respond_to?(:feature)
-      array << parent_object.feature
-    end
-    array << parent_object
-    array
-  end
   
   def parent_association
     parent_object.time_units # ResourceController needs this for the parent association
