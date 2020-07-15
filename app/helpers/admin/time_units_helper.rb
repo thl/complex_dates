@@ -14,7 +14,7 @@ module Admin::TimeUnitsHelper
     
     certainty_field_name = (field_type+"_certainty_id").to_sym
     html = ""
-    html += "<p>"
+    html += "<div class='complex-data-row'>"
     html += "<div class='complex-date-certainty-wrapper'>"
     html += form_builder.collection_select certainty_field_name, Certainty.options, :id, :name, {}, :onchange => ("toggle_end_date(this, '#{get_object_name_for(form_builder)}_#{field_type}_end_wrapper')" if show_end)
     html += "</div>"
@@ -47,7 +47,7 @@ module Admin::TimeUnitsHelper
       html += "</div>"
     end
     
-    html += "</p>"
+    html += "</div>"
     
     html.html_safe
   end
@@ -58,7 +58,7 @@ module Admin::TimeUnitsHelper
     
     certainty_field_name = (field_type+"_certainty_id").to_sym
     html = ""
-    html += "<p>"
+    html += "<div class='complex-data-row'>"
     html += "<div class='complex-date-certainty-wrapper'>"
     html += form_builder.collection_select certainty_field_name, Certainty.options, :id, :name, {}, :onchange => ("toggle_end_date(this, '#{get_object_name_for(form_builder)}_#{field_type}_end_wrapper')" if show_end)
     html += "</div>"
@@ -76,14 +76,13 @@ module Admin::TimeUnitsHelper
       html += "</div>"
     end
     
-    html += "</p>"
+    html += "</div>"
     
     html.html_safe
   end
 
   def complex_date_fields(field_html, certainty_html, end_html=nil)
     html = ""
-    html += "<p>"
     html += "<div class='complex-date-field-wrapper'>"
     html += "</div>"
     html += "<div class='complex-date-certainty-wrapper'>"
@@ -91,7 +90,6 @@ module Admin::TimeUnitsHelper
     unless end_html.nil?
       html += end_html
     end
-    html += "</p>"
     html.html_safe
   end
   
