@@ -40,7 +40,7 @@ fieldset.complex-date select.intercalary {
 }
 
 fieldset.complex-date {
-	width: 300px;
+	width: 50%;
 	float: left;
 	clear: none;
 }
@@ -48,14 +48,22 @@ fieldset.complex-date {
 fieldset.complex-date-range {
 	width: 750px;
 }
+fieldset.complex-date .complex-date-field-wrapper {
+  width: 100px;
+}
 
-fieldset.complex-date-range > fieldset.complex-date {
-	margin-right: 10px;
+fieldset.complex-date .complex-date-field-wrapper label{
+  text-align: left;
+}
+
+fieldset.complex-date > div:nth-of-type(odd) {
+  background: #efefef;
 }
 
 .complex-date-certainty-wrapper {
 	float: right;
 	margin-top: 1.5em;
+  width: 45%;
 }
 
 .time-unit-range-wrapper {
