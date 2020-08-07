@@ -1,5 +1,5 @@
 <%= javascript_include_tag "complex_dates/application" %>
-<%= form_for @time_unit, url: {action: 'create'} do |f| %>
+<%= form_for [:admin, parent_object, @time_unit] do |f| %>
 	<%= f.hidden_field :dateable_id %>
 	<%= f.hidden_field :dateable_type %>
 	<fieldset class="time-unit">
