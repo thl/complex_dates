@@ -1,12 +1,12 @@
-class Season < PassiveRecord::Base
-  extend IsOptionable
+class Season
+  include KmapsEngine::PassiveRecord
   
-  schema :id => Integer, :gregorian_name => String, :tibetan_name => String
+  attr_accessor :gregorian_name, :tibetan_name
   
-  create :id => 1, :gregorian_name => "Spring", :tibetan_name => "dpyid ka"
-  create :id => 2, :gregorian_name => "Summer", :tibetan_name => "dbyar ka"
-  create :id => 3, :gregorian_name => "Fall", :tibetan_name => "ston ka"
-  create :id => 4, :gregorian_name => "Winter", :tibetan_name => "dgun ka"
+  create gregorian_name: 'Spring', tibetan_name: 'dpyid ka'
+  create gregorian_name: 'Summer', tibetan_name: 'dbyar ka'
+  create gregorian_name: 'Fall', tibetan_name: 'ston ka'
+  create gregorian_name: 'Winter', tibetan_name: 'dgun ka'
   
   def to_s
     "#{gregorian_name} / #{tibetan_name}"

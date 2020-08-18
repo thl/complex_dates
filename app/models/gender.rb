@@ -1,10 +1,10 @@
-class Gender < PassiveRecord::Base
-  extend IsOptionable
+class Gender
+  include KmapsEngine::PassiveRecord
   
-  schema :name => String, :id => Integer
+  attr_accessor :name
   
-  create :name => "Female", :id => 1
-  create :name => "Male", :id => 2
+  create name: 'Female'
+  create name: 'Male'
   
   def to_s
     name

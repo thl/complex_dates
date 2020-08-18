@@ -3,10 +3,10 @@
 <%= f.hidden_field :calendar_id %>
 <%= f.hidden_field :is_range %>
 <%= f.label :frequency %><br/>
-<%= f.collection_select(:frequency_id, TibetanFrequency.options, :id, :title, { :include_blank => true }) %>
+<%= f.collection_select(:frequency_id, TibetanFrequency.order(:order), :id, :title, { include_blank: true }) %>
 </div><br/>
 <fieldset class="complex-date">
   	<legend>Tibetan Date</legend>
-<%= render :partial => "admin/tibetan_dates/form_fields", :locals => {:f => f, :object_name => :date} %>
+<%= render partial: 'admin/tibetan_dates/form_fields', locals: { f: f, object_name: :date } %>
 </fieldset>
 <% end %>

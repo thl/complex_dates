@@ -1,8 +1,10 @@
-class Calendar < PassiveRecord::Base
-  schema :name => String, :id => Integer
+class Calendar
+  include KmapsEngine::PassiveRecord
   
-  create :name => "Gregorian", :id => 1
-  create :name => "Tibetan", :id => 2
+  attr_accessor :name
+  
+  create name: 'Gregorian'
+  create name: 'Tibetan'
   
   def to_s
     name

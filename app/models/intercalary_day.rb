@@ -1,10 +1,10 @@
-class IntercalaryDay < PassiveRecord::Base
-  extend IsOptionable
+class IntercalaryDay
+  include KmapsEngine::PassiveRecord
   
-  schema :name => String, :id => Integer
+  attr_accessor :name
   
-  create :name => "Secondary", :id => 1
-  create :name => "Tertiary", :id => 2
+  create name: 'Secondary'
+  create name: 'Tertiary'
   
   def to_s
     name

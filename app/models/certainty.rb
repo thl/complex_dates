@@ -1,11 +1,11 @@
-class Certainty < PassiveRecord::Base
-  extend IsOptionable
-
-  schema :name => String, :id => Integer
+class Certainty
+  include KmapsEngine::PassiveRecord
   
-  create :name => "Certain", :id => 1
-  create :name => "Probable", :id => 2
-  create :name => "Estimated", :id => 3
+  attr_accessor :name
+  
+  create name: 'Certain'
+  create name: 'Probable'
+  create name: 'Estimated'
   
   def to_s
     name

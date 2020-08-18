@@ -1,10 +1,10 @@
-class AmPm < PassiveRecord::Base
-  extend IsOptionable
-
-  schema :name => String, :id => Integer
+class AmPm
+  include KmapsEngine::PassiveRecord
   
-  create :name => "AM", :id => 1
-  create :name => "PM", :id => 2
+  attr_accessor :name
+  
+  create name: 'AM'
+  create name: 'PM'
   
   def to_s
     name

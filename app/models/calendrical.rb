@@ -1,10 +1,10 @@
-class Calendrical < PassiveRecord::Base
-  extend IsOptionable
+class Calendrical
+  include KmapsEngine::PassiveRecord
   
-  schema :name => String, :id => Integer
+  attr_accessor :name
   
-  create :name => "Pakluk Kalacakra", :id => 1
-  create :name => "Tsurpu", :id => 2
+  create name: 'Pakluk Kalacakra'
+  create name: 'Tsurpu'
   
   def to_s
     name

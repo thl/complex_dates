@@ -1,13 +1,13 @@
-class Element < PassiveRecord::Base
-  extend IsOptionable
+class Element
+  include KmapsEngine::PassiveRecord
   
-  schema :name => String, :id => Integer
+  attr_accessor :name
   
-  create :name => "Earth", :id => 1
-  create :name => "Iron", :id => 2
-  create :name => "Water", :id => 3
-  create :name => "Wood", :id => 4
-  create :name => "Fire", :id => 5
+  create name: 'Earth'
+  create name: 'Iron'
+  create name: 'Water'
+  create name: 'Wood'
+  create name: 'Fire'
   
   def to_s
     name

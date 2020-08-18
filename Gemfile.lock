@@ -1,13 +1,7 @@
-GIT
-  remote: https://github.com/ambethia/passiverecord.git
-  revision: cdf0747243e9bbf067ab6fea8cc6cc8f860112b1
-  specs:
-    passiverecord (0.2)
-
 PATH
   remote: .
   specs:
-    complex_dates (2.3.1)
+    complex_dates (2.3.3)
       pg
       rails (>= 5.0)
 
@@ -141,7 +135,7 @@ GEM
     thread_safe (0.3.6)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
-    websocket-driver (0.7.2)
+    websocket-driver (0.7.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
 
@@ -151,7 +145,6 @@ PLATFORMS
 DEPENDENCIES
   complex_dates!
   jquery-rails
-  passiverecord (= 0.2)!
   pg
   rspec-rails
 

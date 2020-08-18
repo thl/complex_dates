@@ -17,7 +17,6 @@ Gem::Specification.new do |s|
   s.test_files = Dir["spec/**/*"]
 
   s.add_dependency 'rails', '>= 5.0'
-  #s.add_dependency 'passiverecord', '0.2'
   s.add_development_dependency 'rspec-rails'
   # Use postgresql as the database for Active Record
   s.add_dependency 'pg'

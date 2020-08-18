@@ -8,7 +8,6 @@ gemspec
 
 # jquery-rails is used by the dummy application
 gem 'jquery-rails'
-gem 'passiverecord', '0.2', :git => 'https://github.com/ambethia/passiverecord.git'
 gem 'pg'
 
 # Declare any dependencies that are still in development here instead of in

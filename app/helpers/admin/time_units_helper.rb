@@ -5,7 +5,7 @@ module Admin::TimeUnitsHelper
     intercalary = options[:intercalary].to_s unless options[:intercalary].blank?
     
     if options[:collection].nil?
-      collection = field_type.classify.constantize.options
+      collection = field_type.classify.constantize.order(:id)
       collection_from_model = true
     else
       collection = options[:collection]
@@ -16,7 +16,7 @@ module Admin::TimeUnitsHelper
     html = ""
     html += "<div class='complex-data-row'>"
     html += "<div class='complex-date-certainty-wrapper'>"
-    html += form_builder.collection_select certainty_field_name, Certainty.options, :id, :name, {}, :onchange => ("toggle_end_date(this, '#{get_object_name_for(form_builder)}_#{field_type}_end_wrapper')" if show_end)
+    html += form_builder.collection_select certainty_field_name, Certainty.order(:id), :id, :name, {}, :onchange => ("toggle_end_date(this, '#{get_object_name_for(form_builder)}_#{field_type}_end_wrapper')" if show_end)
     html += "</div>"
     html += "<div class='complex-date-field-wrapper'>"
     html += form_builder.label field_name, (options[:text] || field_type.humanize.titleize)+":"
@@ -26,7 +26,7 @@ module Admin::TimeUnitsHelper
       html += form_builder.select field_name, collection, :include_blank => true
     end
     unless intercalary.blank?
-      intercalary_collection = "intercalary_#{intercalary}".classify.constantize.find(:all)
+      intercalary_collection = "intercalary_#{intercalary}".classify.constantize.all
       html += form_builder.collection_select "intercalary_#{intercalary}_id", intercalary_collection, :id, :name, {:include_blank => true}, :class => "intercalary"
     end
     html += "</div>"
@@ -41,7 +41,7 @@ module Admin::TimeUnitsHelper
         html += form_builder.select end_field_name, collection, :include_blank => true
       end
       unless intercalary.blank?
-        intercalary_collection = "intercalary_#{intercalary}".classify.constantize.find(:all)
+        intercalary_collection = "intercalary_#{intercalary}".classify.constantize.all
         html += form_builder.collection_select "intercalary_#{intercalary}_end_id", intercalary_collection, :id, :name, :include_blank => true
       end
       html += "</div>"
@@ -60,7 +60,7 @@ module Admin::TimeUnitsHelper
     html = ""
     html += "<div class='complex-data-row'>"
     html += "<div class='complex-date-certainty-wrapper'>"
-    html += form_builder.collection_select certainty_field_name, Certainty.options, :id, :name, {}, :onchange => ("toggle_end_date(this, '#{get_object_name_for(form_builder)}_#{field_type}_end_wrapper')" if show_end)
+    html += form_builder.collection_select certainty_field_name, Certainty.order(:id), :id, :name, {}, :onchange => ("toggle_end_date(this, '#{get_object_name_for(form_builder)}_#{field_type}_end_wrapper')" if show_end)
     html += "</div>"
     html += "<div class='complex-date-field-wrapper'>"
     html += form_builder.label field_name, (options[:text] || field_type.humanize.titleize)+":"
