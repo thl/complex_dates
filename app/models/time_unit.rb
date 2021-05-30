@@ -1,14 +1,14 @@
 class TimeUnit < ActiveRecord::Base
   include KmapsEngine::IsNotable
   
-  belongs_to :dateable, :polymorphic=>true
+  belongs_to :dateable, polymorphic: true, touch: true
   # belongs_to :calendar
-  belongs_to :date, :class_name => 'ComplexDate', optional: true
-  belongs_to :start_date, :class_name => 'ComplexDate', optional: true
-  belongs_to :end_date, :class_name => 'ComplexDate', optional: true
+  belongs_to :date, class_name: 'ComplexDate', optional: true, dependent: :destroy
+  belongs_to :start_date, class_name: 'ComplexDate', optional: true, dependent: :destroy
+  belongs_to :end_date, class_name: 'ComplexDate', optional: true, dependent: :destroy
   accepts_nested_attributes_for :date, :start_date, :end_date
   
-  has_many :imports, :as => 'item', :dependent => :destroy
+  has_many :imports, as: 'item', dependent: :destroy
   
   def to_s
     s = is_range ? "#{start_date} - #{end_date}" : date.to_s
@@ -106,6 +106,10 @@ class TimeUnit < ActiveRecord::Base
         end
       end
     end
+  end
+  
+  def feature
+    self.dateable.feature
   end
 end
 

@@ -29,8 +29,14 @@ class ComplexDate < ActiveRecord::Base
   #belongs_to :rabjung_end, :class_name => "Rabjung"
   #belongs_to :rabjung_certainty, :class_name => "Certainty"
   
-  before_validation :set_certainty_of_blank_fields
   include Comparable
+  before_validation :set_certainty_of_blank_fields
+  
+  after_save do |record|
+    time_unit = record.time_unit
+    time_unit.touch if !time_unit.nil?
+  end
+  
   
   def year_certainty
     self.year_certainty_id.nil? ? nil : Certainty.find(self.year_certainty_id)
