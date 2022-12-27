@@ -330,14 +330,14 @@ class ComplexDate < ActiveRecord::Base
   def formatted_time
     # If an end time isn't set:
     if hour_end.nil? && minute_end.nil?
-      unless hour.nil?
-        am_pm = " #{hour > 11 ? 'PM' : 'AM'}"
-      end
-      "#{ff(:hour, true)}:#{ff(:minute, true)}#{am_pm}" unless hour.nil? && minute.nil?
+      return nil if hour.nil?
+      min = minute.nil? ? '' : ":#{ff(:minute, true)}"
+      am_pm = " #{hour > 11 ? 'PM' : 'AM'}"
+      return ff(:hour, true) + min + am_pm
     # If at least one of the _end fields isn't nil:
     else
       certainty_str = format_grouped_certainties([:hour, :minute])
-      "#{format_time(hour, minute)}-#{format_time(hour_end, minute_end)}#{certainty_str}"
+      return "#{format_time(hour, minute)}-#{format_time(hour_end, minute_end)}#{certainty_str}"
     end
   end
   
