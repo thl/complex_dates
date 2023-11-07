@@ -1,0 +1,1 @@
+Rails.application.config.assets.precompile.concat(['complex_dates/application.js'])
