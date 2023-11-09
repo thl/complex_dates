@@ -1,5 +1,5 @@
 module Admin::TimeUnitsHelper
-  def complex_date_select(form_builder, field_name, show_end=true, options={})
+  def complex_date_select(form_builder, field_name, show_end=true, **options)
     field_name_str = field_name.to_s
     field_type = field_name_str.sub(/_id$/, '')
     intercalary = options[:intercalary].to_s unless options[:intercalary].blank?
@@ -52,7 +52,7 @@ module Admin::TimeUnitsHelper
     html.html_safe
   end
   
-  def complex_date_text_field(form_builder, field_name, show_end=true, options={})
+  def complex_date_text_field(form_builder, field_name, show_end=true, **options)
     field_name_str = field_name.to_s
     field_type = field_name_str
     
@@ -93,7 +93,7 @@ module Admin::TimeUnitsHelper
     html.html_safe
   end
   
-  def complex_date_display_field(complex_date, field_name, show_end=true, options={})
+  def complex_date_display_field(complex_date, field_name, show_end=true, **options)
     field_name_str = field_name.to_s
     field_type = field_name_str
     display_field_name = (field_name_str =~ /_id$/ ? field_name_str.sub(/_id$/, "") : field_name_str).to_sym

@@ -483,7 +483,7 @@ class ComplexDate < ActiveRecord::Base
   
   # This returns the start, end (if it exists), and certainty (if it exists and isn't "Certain") values, formatted
   # for display.  It's short-hand for "formatted field". 
-  def ff(field_name, format_method=nil, options={})
+  def ff(field_name, format_method=nil, **options)
     end_field_name = "#{field_name}_end".to_sym
     certainty_field_name = "#{field_name}_certainty".to_sym
     format_method = "format_#{field_name}".to_sym if format_method == true

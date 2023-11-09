@@ -23,7 +23,7 @@ module IsDateable
       #
       #
       #
-      def time_unit_attributes=(attrs={})
+      def time_unit_attributes=(**attrs)
         begin
           o = time_units.find(attrs[:id])
           if attrs[:marked_for_deletion].to_s == '1'
@@ -32,7 +32,7 @@ module IsDateable
             o.attributes=attrs
           end
         rescue
-          time_units.build(attrs)
+          time_units.build(**attrs)
         end
       end
       
