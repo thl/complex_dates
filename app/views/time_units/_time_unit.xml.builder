@@ -19,5 +19,5 @@ xml.time_unit do
   freq = time_unit.frequency
   xml.frequency(freq.title) if !freq.nil?
   xml.display_string(time_unit.to_s)
-  xml << render(partial: 'notes/index.xml.builder', locals: {notes: time_unit.notes})
+  xml << render(partial: 'notes/index', format: 'xml', locals: {notes: time_unit.notes})
 end
