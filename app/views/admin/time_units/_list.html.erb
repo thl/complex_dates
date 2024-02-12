@@ -1,40 +1,27 @@
 <% show_type ||= nil
    options ||= {}
    if list.empty? %>
-	<%= empty_collection_message("No dates available.") %>
+<%=  empty_collection_message("No dates available.") %>
 <% else %>
-
-<table class="listGrid">
-
-	<tr>
-		<th class="listActionsCol"></th>
-		<%= "<th>Type</th>".html_safe unless options[:hide_type] %>
-		<%= "<th>Type Value</th>".html_safe unless options[:hide_type_value] %>
-		<th>Date</th>
-	</tr>
-
-	<% list.each do |item| %>
-	<tr>
-
-		<td class="listActionsCol">
-		  <%= list_actions_for_item(item,
-  		  {
-  		    :delete_path => item.dateable.nil? ? polymorphic_path([:admin, item]) : polymorphic_path([:admin, item.dateable, item]),
-  		    :edit_path => item.dateable.nil? ? edit_polymorphic_path([:admin, item]) : edit_polymorphic_path([:admin, item.dateable, item], :action => "edit"),
-  		    :view_path => item.dateable.nil? ? polymorphic_path([:admin, item]) : polymorphic_path([:admin, item.dateable, item])
-  		  }
-		  ) %>
-		</td>
-		
-		<%= "<td>#{item.dateable_type.titleize}</td>".html_safe unless options[:hide_type] %>
-		
-		<%= "<td>#{item.dateable}</td>".html_safe unless options[:hide_type_value] %>
-		
-		<td><%= item.to_s %></td>
-
-	</tr>
-	<% end %>
-	
-</table>
-
+   <table class="listGrid">
+     <tr>
+       <th class="listActionsCol"></th>
+<%=   "<th>Type</th>".html_safe unless options[:hide_type] %>
+<%=   "<th>Type Value</th>".html_safe unless options[:hide_type_value] %>
+       <th>Date</th>
+     </tr>
+<%   list.each do |item| %>
+     <tr>
+       <td class="listActionsCol">
+<%=     list_actions_for_item(item,
+          delete_path: item.dateable.nil? ? polymorphic_path([:admin, item]) : polymorphic_path([:admin, item.dateable, item]),
+          edit_path: item.dateable.nil? ? edit_polymorphic_path([:admin, item]) : edit_polymorphic_path([:admin, item.dateable, item], :action => "edit"),
+          view_path: item.dateable.nil? ? polymorphic_path([:admin, item]) : polymorphic_path([:admin, item.dateable, item])) %>
+       </td>
+<%=   "<td>#{item.dateable_type.titleize}</td>".html_safe unless options[:hide_type] %>
+<%=   "<td>#{item.dateable}</td>".html_safe unless options[:hide_type_value] %>
+       <td><%= item.to_s %></td>
+     </tr>
+<%   end %>
+   </table>
 <% end %>
