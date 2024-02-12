@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    complex_dates (2.3.9)
+    complex_dates (2.4.1)
       pg
       rails (>= 5.0)
 
@@ -128,10 +128,10 @@ GEM
     net-smtp (0.4.0)
       net-protocol
     nio4r (2.5.9)
-    nokogiri (1.15.4)
+    nokogiri (1.16.2)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
-    pg (1.2.3)
+    pg (1.5.4)
     psych (5.1.1.1)
       stringio
     racc (1.7.3)
@@ -217,4 +217,4 @@ DEPENDENCIES
   rspec-rails
 
 BUNDLED WITH
-   1.17.3
+   2.4.22
