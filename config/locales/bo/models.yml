@@ -1,0 +1,8 @@
+# model localization file for Tibetan.
+bo:
+    activerecord:
+        # Model names will be kept in lower case. Invoke .capitalize or .titleize if you need them in uppercase.
+        models:
+            time_unit:
+                one: 'date'
+                other: 'dates'
