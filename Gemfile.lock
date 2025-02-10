@@ -1,9 +1,9 @@
 PATH
   remote: .
   specs:
-    complex_dates (2.4.2)
+    complex_dates (2.4.3)
       pg
-      rails (>= 5.0)
+      rails
 
 GEM
   remote: https://rubygems.org/
